@@ -20,19 +20,32 @@ const Item = styled.div`
     padding: 0 3rem;
     font-size: 1.5rem;
   }
+  .customDiv{
+    display: inline-block;
+    border-top: 1px solid #E1E1E1;
+  }
   .buttonList {
-    display: grid;
-    width: 100%;
-    border-top: 1px solid ${props => props.theme.lightgrey};
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-gap: 1px;
-    background: ${props => props.theme.lightgrey};
+    text-align: center;
+    width: 30%;
+    float: left;
     & > * {
       background: white;
       border: 0;
       font-size: 1rem;
       padding: 1rem;
     }
+  }
+  .cartBtn{
+    border: none;
+    width: 70%;
+    text-align: center;
+    font-family: none;
+  }
+  .delBtn{
+    width: 100%;
+    border: 1px solid;
+    text-align: center;
+    font-family: none;
   }
 `;
 

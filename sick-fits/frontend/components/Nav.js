@@ -21,13 +21,13 @@ const NavDiv = styled.div`
 
 const Nav = () => (
     <NavStyles>
-        <Link href='/'>
+        <Link href='/items'>
             <a> Item </a>
         </Link>
         <Link href='/sell'>
             <a> Sell </a>
         </Link>
-        <Link href='/sell'>
+        <Link href='/'>
             <a> Signup </a>
         </Link>
     </NavStyles>

@@ -8,6 +8,22 @@ const Mutations = {
 
        return item
     },
+    updateItem(parent, args, ctxt, info){
+        const update = {...args};
+        delete update.id;
+        return ctxt.db.mutation.updateItem({
+            data: update,
+            where:{
+                id: args.id
+            }
+        }, info)
+    },
+    async deleteItem(parent,args,ctxt,info){
+        const where = { id: args.id }
+        const item = await ctxt.db.query.item({ where }, `{ id title}`); 
+        //TODO
+        return ctxt.db.mutation.deleteItem({where},info)
+    }
     // createDog(parent, args, ctxt, info){
     //     global.dogs = global.dogs || []
     //     const newDog = { name: args.name }
