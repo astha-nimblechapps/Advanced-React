@@ -41,7 +41,6 @@ class SingleItem extends Component {
     render() {
         return (
             <div>
-                Astha
                 <Query query={SINGLE_ITEM} variables={{ id: this.props.id }}>
                     {
                         ({data,loading,error}) =>{
