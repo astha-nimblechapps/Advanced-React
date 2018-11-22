@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import { Mutation } from 'react-apollo';
 import styled from 'styled-components';
 import NavStyles from './styles/NavStyles'
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import User from './User';
 import SignOut from './SignOut';
+import { TOOGLE_CART } from './Cart';
+import CartCount from './CartCount';
 
 Router.onRouteChangeStart = () => {
     NProgress.start();
@@ -42,9 +45,22 @@ const Nav = () => (
                 <Link href='/sell'>
                     <a> Sell </a>
                 </Link>
+                <Link href='/orders'>
+                    <a> My Orders </a>
+                </Link>
                 <SignOut>
 
                 </SignOut>
+                <Mutation mutation={TOOGLE_CART}>
+                    {
+                        (toogleCart) => (
+                            <button onClick={toogleCart}>
+                             Cart
+                             <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)}></CartCount>
+                            </button>
+                        )
+                    }
+                </Mutation>
                 </>
                 )
             }

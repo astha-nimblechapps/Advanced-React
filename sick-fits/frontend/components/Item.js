@@ -6,6 +6,7 @@ import PriceTag from "./styles/PriceTag";
 import ItemStyle from './styles/ItemStyles';
 import formatMoney  from '../lib/formatMoney';
 import DeleteItem from './DeleteItem'
+import AddCart from './AddCart'
 
 class Item extends Component {
     render() {
@@ -19,6 +20,7 @@ class Item extends Component {
                     <Link href={{ pathname:'/item', query: { id: item.id } }}>
                         <a>{ item.title }</a>
                     </Link>
+                    
                 </Title>
                 <PriceTag>
                     {formatMoney(item.price)}
@@ -30,7 +32,7 @@ class Item extends Component {
                         <a> Edit </a>
                     </Link>
                 </div>
-                    <a className="cartBtn">Add to Cart </a>
+                    <AddCart id={item.id}></AddCart>
                     <DeleteItem id={item.id}>Delete</DeleteItem>
                 </div>
             </ItemStyle>
