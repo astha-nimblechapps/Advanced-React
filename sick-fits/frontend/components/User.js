@@ -9,6 +9,9 @@ const LOGGED_USER = gql`
       email
       name
       permissions
+      orders{
+        id
+      }
       cart{
         id
         quantity

@@ -31,7 +31,7 @@ class AddCart extends React.Component{
             id
         }} refetchQueries={[{ query: LOGGED_USER }]}> 
         { (addToCart,{loading}) => (
-        <ADDCART disabled={loading} onClick={addToCart}>Add {loading && 'ing'} To Cart</ADDCART>
+        <ADDCART disabled={loading} onClick={addToCart}>Add{loading && 'ing'}To Cart</ADDCART>
         )} 
         </Mutation>)
     }
@@ -39,3 +39,4 @@ class AddCart extends React.Component{
 }
 
 export default AddCart;
+export { ADD_TO_CART };

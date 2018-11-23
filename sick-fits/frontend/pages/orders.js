@@ -1,12 +1,12 @@
-import OrderList from '../components/OrderList'
-import PleaseSignIn from '../components/PleaseSignIn'
+import OrderList from "../components/OrderList";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 const orders = props => (
-    <div>
-        <PleaseSignIn>
-            <OrderList></OrderList>
-        </PleaseSignIn>
-    </div>
+  <div>
+    <PleaseSignIn>
+      <OrderList />
+    </PleaseSignIn>
+  </div>
 );
 
 export default orders;
