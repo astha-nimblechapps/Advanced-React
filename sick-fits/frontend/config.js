@@ -2,3 +2,5 @@
 export const endpoint = `http://localhost:4444`;
 export const prodEndpoint = `https://demo-app-react.herokuapp.com/`;
 export const perPage = 4;
+//
+//"start": "next start -p $PORT",
