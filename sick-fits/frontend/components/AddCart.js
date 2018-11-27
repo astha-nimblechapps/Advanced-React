@@ -50,7 +50,7 @@ const ADD_TO_TEMP_CART = gql`
 class AddCart extends React.Component {
   addTempCart = async (e, addTempCart) => {
     e.preventDefault();
-    if (!this.props.color && !this.props.size) {
+    if (this.props.color === '' && this.props.size === '' && this.props.color === 'none' && this.props.size === 'none') {
       alert("Please Select Color and Size both")
     } else {
       if (localStorage.getItem("randomId")) {
