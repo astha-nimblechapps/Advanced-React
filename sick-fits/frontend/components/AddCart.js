@@ -22,7 +22,7 @@ const ADD_TO_CART = gql`
 `;
 
 const ADD_TO_TEMP_CART = gql`
-  mutation ADD_TO_TEMP_CART($id: ID!, $token: String!,$color: String!, $size: String!) {
+  mutation ADD_TO_TEMP_CART($id: ID!, $token: String!,$color: String, $size: String) {
     addToTempCart(id: $id, token: $token,color: $color, size:$size) {
       id
       quantity

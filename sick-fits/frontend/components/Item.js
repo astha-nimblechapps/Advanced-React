@@ -9,6 +9,22 @@ import DeleteItem from './DeleteItem'
 import AddCart from './AddCart'
 
 class Item extends Component {
+
+    state = {
+        tokenId: "",
+    }
+
+    componentDidMount() {
+        if(localStorage.getItem("randomId")){
+          this.setState({
+            tokenId: localStorage.getItem("randomId").toString()
+          })
+        }
+        // this.setState({
+        //   randomUser: localStorage.getItem("randomId")
+        // });
+      }
+    
     render() {
         const { item } = this.props;
         return (
