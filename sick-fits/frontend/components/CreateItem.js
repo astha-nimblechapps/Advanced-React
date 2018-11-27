@@ -34,8 +34,10 @@ class CreateItem extends Component {
     image: '',
     largeImage: '',
     price: 0,
+   
   };
   handleChange = e => {
+    console.log(e.target.value)
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
     this.setState({ [name]: val });
@@ -115,7 +117,30 @@ class CreateItem extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-
+              {/* <label htmlFor="color">
+                Select Color
+                    <select 
+                    name="color"
+                    value={this.state.color} 
+                    onChange={this.handleChange} >
+                    <option value="none">Please Select Color</option>
+                  <option value="Red">Red</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                  </select>
+              </label>
+              <label htmlFor="size">
+                Select Size
+                    <select 
+                    name="size"
+                    value={this.state.size} 
+                    onChange={this.handleChange} >
+                    <option value="none">Please Select Size</option>
+                  <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select>
+              </label> */}
               <label htmlFor="description">
                 Description
                 <textarea

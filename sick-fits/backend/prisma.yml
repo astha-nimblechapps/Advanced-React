@@ -1,6 +1,7 @@
 #endpoint: ${env:PRISMA_ENDPOINT}
 #endpoint: ${env:PRISMA_ENDPOINT}
 endpoint: https://demo-astha-403ad8e958.herokuapp.com/dmeo-db/prod
+#endpoint: https://eu1.prisma.sh/astha-patel/demo-astha/dev
 datamodel: datamodel.prisma
 secret: ${env:PRISMA_SECRET}
 hooks:

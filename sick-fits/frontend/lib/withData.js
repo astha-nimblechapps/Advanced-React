@@ -28,10 +28,16 @@ function createClient({ headers }) {
             cache.writeData(data);
             return data;
           },
+          addToCart(_variables,{cache}){
+            const {items} = cache.readQuery({
+              query: LOCAL_STATE_ITEM,
+            });
+            console.log(items);
+          }
         },
       },
       defaults: {
-        cartOpen: false,
+        cartOpen: false
       }
     }
   });

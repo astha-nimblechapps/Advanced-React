@@ -26,6 +26,11 @@ const CartItem = (props) =>{
         <div className="cart-item-details">
             <h3>{props.cartItem.item.title}</h3>
             <p>
+                { props.cartItem.color }
+                <br/>
+                { props.cartItem.size }
+            </p>
+            <p>
                 {formatMoney(props.cartItem.item.price * props.cartItem.quantity)}
                 { ' - ' }
                 <em>{props.cartItem.quantity} &times; {formatMoney(props.cartItem.item.price)}</em>

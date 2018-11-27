@@ -7,6 +7,7 @@ enum Permission{
   PERMISSIONUPDATE
 }
 
+
 type User {
   id: ID! @unique
   name: String!
@@ -32,7 +33,9 @@ type CartItem{
   id: ID! @unique
   quantity: Int! @default(value: 1)
   item: Item
-  user: User!
+  user: User
+  color:String
+  size: String
 }
 
 type OrderItem{
@@ -54,4 +57,13 @@ type Order{
   charge: String! 
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type TempCartItem{
+  id: ID! @unique
+  quantity: Int! @default(value: 1)
+  color:String
+  size: String
+  token: String
+  item: Item
 }

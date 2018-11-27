@@ -53,35 +53,41 @@ class Payment extends Component {
       <User>
         {({ data: { me }, loading }) => {
           if (loading) return <p>Loading</p>;
-          return (
-            <Mutation
-              mutation={CREATE_ORDER}
-              refetchQueries={[
-                {
-                  query: LOGGED_USER
-                }
-              ]}
-            >
-              {(createOrder, {}) => {
-                return (
-                  <StripeCheckout
-                    amount={calcTotalPrice(me.cart)}
-                    name="DemoAstha"
-                    description={`Order of ${totalItems(me.cart)} items`}
-                    image={
-                      me.cart.length && me.cart[0].item && me.cart[0].item.image
-                    }
-                    stripeKey="pk_test_Nle1djKXpUrjnf4IIXqR5q4h"
-                    currency="USD"
-                    email={me.email}
-                    token={res => this.onToken(res, createOrder)}
-                  >
-                    {this.props.children}
-                  </StripeCheckout>
-                );
-              }}
-            </Mutation>
-          );
+          if (!me) {
+           return <p>{ this.props.children }</p>
+          } else {
+            return (
+              <Mutation
+                mutation={CREATE_ORDER}
+                refetchQueries={[
+                  {
+                    query: LOGGED_USER
+                  }
+                ]}
+              >
+                {(createOrder, {}) => {
+                  return (
+                    <StripeCheckout
+                      amount={calcTotalPrice(me.cart)}
+                      name="DemoAstha"
+                      description={`Order of ${totalItems(me.cart)} items`}
+                      image={
+                        me.cart.length &&
+                        me.cart[0].item &&
+                        me.cart[0].item.image
+                      }
+                      stripeKey="pk_test_Nle1djKXpUrjnf4IIXqR5q4h"
+                      currency="USD"
+                      email={me.email}
+                      token={res => this.onToken(res, createOrder)}
+                    >
+                      {this.props.children}
+                    </StripeCheckout>
+                  );
+                }}
+              </Mutation>
+            );
+          }
         }}
       </User>
     );
