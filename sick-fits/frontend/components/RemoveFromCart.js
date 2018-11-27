@@ -33,6 +33,7 @@ class RemoveFromCart extends Component {
         console.log('Running....')
         const data = cache.readQuery({
             query: LOGGED_USER
+            
         });
         console.log(data)
         const cartItemId = payload.data.removeFromCart.id;
