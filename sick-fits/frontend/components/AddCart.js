@@ -22,8 +22,13 @@ const ADD_TO_CART = gql`
 `;
 
 const ADD_TO_TEMP_CART = gql`
-  mutation ADD_TO_TEMP_CART($id: ID!, $token: String!,$color: String, $size: String) {
-    addToTempCart(id: $id, token: $token,color: $color, size:$size) {
+  mutation ADD_TO_TEMP_CART(
+    $id: ID!
+    $token: String!
+    $color: String
+    $size: String
+  ) {
+    addToTempCart(id: $id, token: $token, color: $color, size: $size) {
       id
       quantity
       color
@@ -43,37 +48,40 @@ const ADD_TO_TEMP_CART = gql`
  */
 
 class AddCart extends React.Component {
- 
   addTempCart = async (e, addTempCart) => {
-        e.preventDefault();
-      if(localStorage.getItem("randomId")){
-          console.log("true")
+    e.preventDefault();
+    if (!this.props.color && !this.props.size) {
+      alert("Please Select Color and Size both")
+    } else {
+      if (localStorage.getItem("randomId")) {
+        console.log("true");
         await addTempCart({
-            variables:{
-                id: this.props.id,
-                token: localStorage.getItem("randomId"),
-                color: this.props.color,
-                size: this.props.size,
-            }
-        })
-      }else{
-          console.log("false")
-        const min = 1;
-        const max = 100;
-        const rand = min + Math.random() * (max - min);
-       // console.log(rand)
-        this.setState({ token: rand })
-        localStorage.setItem("randomId",rand);
-       // console.log(JSON.stringify(localStorage.getItem("randomId")))
-       await addTempCart({
-        variables:{
+          variables: {
             id: this.props.id,
             token: localStorage.getItem("randomId"),
             color: this.props.color,
-            size: this.props.size,
-        }
-    })
+            size: this.props.size
+          }
+        });
+      } else {
+        console.log("false");
+        const min = 1;
+        const max = 100;
+        const rand = min + Math.random() * (max - min);
+        // console.log(rand)
+        this.setState({ token: rand });
+        localStorage.setItem("randomId", rand);
+        // console.log(JSON.stringify(localStorage.getItem("randomId")))
+        await addTempCart({
+          variables: {
+            id: this.props.id,
+            token: localStorage.getItem("randomId"),
+            color: this.props.color,
+            size: this.props.size
+          }
+        });
       }
+    }
   };
 
   render() {
@@ -100,12 +108,11 @@ class AddCart extends React.Component {
             );
           else {
             return (
-              <Mutation
-                mutation={ADD_TO_TEMP_CART}>
+              <Mutation mutation={ADD_TO_TEMP_CART}>
                 {(addToTempCart, { loading }) => (
                   <ADDCART
                     disabled={loading}
-                    onClick={(e) => this.addTempCart(e, addToTempCart)}
+                    onClick={e => this.addTempCart(e, addToTempCart)}
                   >
                     Add{loading && "ing"}To Cart
                   </ADDCART>
