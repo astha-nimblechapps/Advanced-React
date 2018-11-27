@@ -7,8 +7,8 @@ import { LOGGED_USER } from './User'
 import Link from 'next/link';
 
 const SIGNIN = gql`
-  mutation SIGNIN($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
+  mutation SIGNIN($email: String!, $password: String!, $token: String!) {
+    signin(email: $email, password: $password, token: $token) {
       id
       email
       name
@@ -22,7 +22,15 @@ class SignIn extends Component {
         name: '',
         email: '',
         password: '',
+        token: '',
       };
+
+      componentDidMount(){
+          if(localStorage.getItem("randomId")){
+              this.setState({ token: localStorage.getItem("randomId").toString()})
+              localStorage.clear();
+          }
+      }
       saveToState = e => {
         this.setState({ [e.target.name]: e.target.value });
       };
@@ -72,7 +80,7 @@ class SignIn extends Component {
                         <a>Forgot Password.?</a>
                     </Link>
                     <br/>
-                    <button style={{ marginTop: 10 }} type="submit">Sign Up!</button>
+                    <button style={{ marginTop: 10 }} type="submit">Sign In!</button>
 
                 </fieldset>
             </Form>

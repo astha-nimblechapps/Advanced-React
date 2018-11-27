@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/astha-patel/demo-astha/dev
-# timestamp: Mon Nov 26 2018 12:02:39 GMT+0530 (India Standard Time)
+# timestamp: Tue Nov 27 2018 13:56:44 GMT+0530 (India Standard Time)
 
 type AggregateCartItem {
   count: Int!
@@ -34,7 +34,7 @@ type CartItem implements Node {
   id: ID!
   quantity: Int!
   item: Item
-  user: User
+  user: User!
   color: String
   size: String
 }
@@ -54,7 +54,7 @@ input CartItemCreateInput {
   color: String
   size: String
   item: ItemCreateOneInput
-  user: UserCreateOneWithoutCartInput
+  user: UserCreateOneWithoutCartInput!
 }
 
 input CartItemCreateManyWithoutUserInput {
@@ -297,7 +297,7 @@ input CartItemUpdateInput {
   color: String
   size: String
   item: ItemUpdateOneInput
-  user: UserUpdateOneWithoutCartInput
+  user: UserUpdateOneRequiredWithoutCartInput
 }
 
 input CartItemUpdateManyDataInput {
@@ -2469,11 +2469,9 @@ input UserUpdateOneRequiredInput {
   upsert: UserUpsertNestedInput
 }
 
-input UserUpdateOneWithoutCartInput {
+input UserUpdateOneRequiredWithoutCartInput {
   create: UserCreateWithoutCartInput
   connect: UserWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
   update: UserUpdateWithoutCartDataInput
   upsert: UserUpsertWithoutCartInput
 }

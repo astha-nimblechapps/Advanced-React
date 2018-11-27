@@ -75,20 +75,64 @@ const Mutations = {
 
     return user;
   },
-  async signin(parent, { email, password }, ctxt, info) {
+  async signin(parent, { email, password, token }, ctxt, info) {
     const user = await ctxt.db.query.user({
       where: { email: email }
     });
     if (!user) {
       throw new Error("Email and password is incorrect");
     }
+    console.log(token);
+    if (token) {
+      const tempCartItem = await ctxt.db.query.tempCartItems(
+        {
+          where: { token: token }
+        },
+        `{ id, item { id }, quantity, color, size}`
+      );
+      console.log(tempCartItem);
+      if (tempCartItem) {
+        const cart = await tempCartItem.map(
+          async (cartItem) =>{
+            const order = await ctxt.db.mutation.createCartItem(
+              {
+                data: {
+                  quantity: cartItem.quantity,
+                  color: cartItem.color,
+                  size: cartItem.size,
+                  user: {
+                    connect: {
+                      id: user.id
+                    }
+                  },
+                  item: {
+                    connect: {
+                      id: cartItem.item.id
+                    }
+                  }
+                }
+              }
+            )
+            if(order){
+                await ctxt.db.mutation.deleteTempCartItem(
+                    {
+                      where: { id: cartItem.id }
+                    },
+                    info
+                  );
+            }
+            return order
+            })
+        console.log(cart);
+      }
+    }
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
       throw new Error("Email and password is incorrect");
     }
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    const token_log = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
 
-    ctxt.response.cookie("token", token, {
+    ctxt.response.cookie("token", token_log, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365
     });
@@ -308,17 +352,17 @@ const Mutations = {
   },
   async addToTempCart(parent, args, ctxt, info) {
     const [existingCartItem] = await ctxt.db.query.tempCartItems({
-        where: {
-          AND: {
-            item: { id: args.id },
-            token: args.token
-          }
+      where: {
+        AND: {
+          item: { id: args.id },
+          token: args.token
         }
-      });
+      }
+    });
     if (existingCartItem) {
       console.log("This item is already in cart");
-      
-     // console.log(existingToken);
+
+      // console.log(existingToken);
       return ctxt.db.mutation.updateTempCartItem(
         {
           where: {
@@ -371,7 +415,7 @@ const Mutations = {
       },
       info
     );
-  },
+  }
   // createDog(parent, args, ctxt, info){
   //     global.dogs = global.dogs || []
   //     const newDog = { name: args.name }
