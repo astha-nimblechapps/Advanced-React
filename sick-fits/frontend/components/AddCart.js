@@ -120,4 +120,4 @@ class AddCart extends React.Component {
 }
 
 export default AddCart;
-export { ADD_TO_CART };
+export { ADD_TO_CART, ADDCART };

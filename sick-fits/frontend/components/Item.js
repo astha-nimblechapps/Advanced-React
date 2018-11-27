@@ -6,7 +6,9 @@ import PriceTag from "./styles/PriceTag";
 import ItemStyle from './styles/ItemStyles';
 import formatMoney  from '../lib/formatMoney';
 import DeleteItem from './DeleteItem'
-import AddCart from './AddCart'
+import AddCart, {ADDCART} from './AddCart'
+import User from './User';
+import Router from 'next/router';
 
 class Item extends Component {
 
@@ -23,6 +25,13 @@ class Item extends Component {
         // this.setState({
         //   randomUser: localStorage.getItem("randomId")
         // });
+      }
+
+      addToCart = (val) =>{
+          Router.push({
+              pathname: '/item',
+              query: { id: val }
+          })
       }
     
     render() {
@@ -47,7 +56,17 @@ class Item extends Component {
                     <Link href={{ pathname:'/update', query: { id: item.id } }}>
                         <a> Edit </a>
                     </Link>
-                    <AddCart id={item.id}></AddCart>
+                    {
+                        <User>
+                            {
+                               ({ data: { me } }) => {
+                                   if(!me) return <ADDCART onClick={() => this.addToCart(item.id)}> Add To Cart</ADDCART> 
+                                   return <AddCart id={item.id}></AddCart>
+                               }
+                            }
+                        </User>
+                    }
+                    
                     <DeleteItem id={item.id}>Delete</DeleteItem>
               
                 </div>
