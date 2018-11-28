@@ -28,7 +28,12 @@ class SignOut extends Component {
         mutation={SIGNOUT}
         refetchQueries={[
           { query: LOGGED_USER },
-          { query: TEMP_DATA, variables: { token: this.state.tokenId ? this.state.tokenId : '123' } }
+          {
+            query: TEMP_DATA,
+            variables: {
+              token: this.state.tokenId ? this.state.tokenId : "123"
+            }
+          }
         ]}
       >
         {(signout, { error, loading }) => (

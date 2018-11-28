@@ -49,16 +49,13 @@ const ADD_TO_TEMP_CART = gql`
  */
 
 class AddCart extends React.Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       tokenId: ""
     };
-
-   
   }
-  
+
   addToTempCart = async (e, addToTempCart) => {
     e.preventDefault();
     if (
