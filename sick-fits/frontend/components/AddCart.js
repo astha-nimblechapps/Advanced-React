@@ -48,21 +48,29 @@ const ADD_TO_TEMP_CART = gql`
  */
 
 class AddCart extends React.Component {
-  addTempCart = async (e, addToTempCart) => {
+  addToTempCart = async (e, addToTempCart) => {
     e.preventDefault();
-    if (this.props.color === '' || this.props.size === '' || this.props.color === 'none' || this.props.size === 'none') {
-      alert("Please Select Color and Size both")
+    if (
+      this.props.color === "" ||
+      this.props.size === "" ||
+      this.props.color === "none" ||
+      this.props.size === "none"
+    ) {
+      alert("Please Select Color and Size both");
     } else {
       if (localStorage.getItem("randomId")) {
         console.log("true");
-        await addToTempCart({
+        const value = await addToTempCart({
           variables: {
             id: this.props.id,
-            token: localStorage.getItem("randomId"),
+            token: localStorage.getItem("randomId").toString(),
             color: this.props.color,
             size: this.props.size
           }
+        }).catch(err => {
+          console.log(err.message);
         });
+        console.log(value);
       } else {
         console.log("false");
         const min = 1;
@@ -71,15 +79,18 @@ class AddCart extends React.Component {
         // console.log(rand)
         this.setState({ token: rand });
         localStorage.setItem("randomId", rand);
-         console.log(JSON.stringify(localStorage.getItem("randomId")))
-        await addToTempCart({
+        console.log(JSON.stringify(localStorage.getItem("randomId")));
+        const value = await addToTempCart({
           variables: {
             id: this.props.id,
-            token: localStorage.getItem("randomId"),
+            token: localStorage.getItem("randomId").toString(),
             color: this.props.color,
             size: this.props.size
           }
+        }).catch(err => {
+          console.log(err.message);
         });
+        console.log(value);
       }
     }
   };
@@ -112,7 +123,7 @@ class AddCart extends React.Component {
                 {(addToTempCart, { loading }) => (
                   <ADDCART
                     disabled={loading}
-                    onClick={e => this.addTempCart(e, addToTempCart)}
+                    onClick={e => this.addToTempCart(e, addToTempCart)}
                   >
                     Add{loading && "ing"}To Cart
                   </ADDCART>

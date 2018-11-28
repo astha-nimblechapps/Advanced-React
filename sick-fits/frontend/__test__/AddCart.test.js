@@ -7,7 +7,7 @@ import AddCart, { ADD_TO_CART, ADD_TO_TEMP_CART } from "../components/AddCart";
 import { LOGGED_USER } from "../components/User";
 import { fakeUser, fakeCartItem, fakeItem } from "../lib/testUtils";
 import { TEMP_DATA } from '../components/Cart';
-
+import Router from 'next/router';
 
 const mocks = [
   {
@@ -90,10 +90,11 @@ describe("<AddToCart/>", () => {
   });
 
   it("adds item in temp cart", async () => {
+ 
     const moks = [{
       request: {
-        query: ADD_TO_TEMP_CART,
-        variables: { id: "abc", token: localStorage.getItem("randomId"), color: "black", size: "22" }
+        mutation: ADD_TO_TEMP_CART,
+        variables: { id: "abc", token: "123", color: "black", size: "22" }
       },
       result: {
         data: {
@@ -101,7 +102,8 @@ describe("<AddToCart/>", () => {
             id:"omg1",
             quantity: 1,
             color: "black",
-            size: "22"
+            size: "22",
+            __typename: "Item",
           }
         }
       }
@@ -122,24 +124,30 @@ describe("<AddToCart/>", () => {
     let apolloClient;
     const wrapper = mount(
       <MockedProvider mocks={moks}>
-        <ApolloConsumer>
-          {client => {
-            apolloClient = client;
-            return <AddCart id="abc" color="black" size="24" />;
-          }}
-        </ApolloConsumer>
+       <AddCart id="abc" color="black" size="24" />;
       </MockedProvider>
     );
     await wait();
     wrapper.update();
+    
+    Router.router = {
+        push: jest.fn()
+    };
 
-    const createOrderMock = jest.fn().mockResolvedValue({
-      data: { addToTempCart: {  id: "abc", token: localStorage.setItem("randomId", "123456"), color: "black", size: "22" } },
-    });
-    wrapper.find("button").simulate('click', { preventDefault() {},createOrderMock })
-    const data  = await apolloClient.query({ query: TEMP_DATA, variables:{ token: "absjk"} });
-    console.log(data)
-    console.log(wrapper.debug());
+  wrapper.find('button').simulate('click', { preventDefault() {}, moks })
+
+  await wait(50);
+  //   const button = wrapper.find("button");
+  //   // button.props.arguments({ preventDefault() {},createOrderMock })
+  //   console.log(button.simulate('click', { preventDefault() {}, moks }))
+  //   // // const createOrderMock = jest.fn().mockResolvedValue({
+  //   // //   data: { addToTempCart: {  id: "abc", token: localStorage.setItem("randomId", "123456"), color: "black", size: "22" } },
+  //   // // });
+  //   // //, { preventDefault() {},createOrderMock }
+  //   // wrapper.find("button").simulate('click')
+  //   // await wait();
+  //   const data  = await apolloClient.query({ query: TEMP_DATA, variables:{ token: "absjk"} });
+  //  console.log(data)
   });
 
   it("change add to adding", async () => {
