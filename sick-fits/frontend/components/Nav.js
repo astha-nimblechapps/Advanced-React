@@ -85,6 +85,9 @@ class Nav extends React.Component {
               <Link href="/orders">
                 <a> My Orders </a>
               </Link>
+              <Link href="/permission">
+                <a>My Account</a>
+              </Link>
               <SignOut />
               <Mutation mutation={TOOGLE_CART}>
                 {toogleCart => (
