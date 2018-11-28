@@ -27,7 +27,7 @@ class SignIn extends Component {
   componentDidMount() {
     if (localStorage.getItem("randomId")) {
       this.setState({ token: localStorage.getItem("randomId").toString() });
-      localStorage.clear();
+      // localStorage.clear();
     }
   }
   saveToState = e => {

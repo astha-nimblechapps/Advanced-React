@@ -99,7 +99,7 @@ class Cart extends React.Component {
               </CloseButton>
               <Supreme>Your Cart</Supreme>
               <p>
-                You have {cart.length} itme
+                You have {cart.length} item
                 {cart.length === 1 ? "" : "s"} in your cart
               </p>
             </header>
@@ -134,7 +134,7 @@ class Cart extends React.Component {
                 </CloseButton>
                 <Supreme>Your Cart</Supreme>
                 <p>
-                  You have {me.cart.length} itme
+                  You have {me.cart.length} item
                   {me.cart.length === 1 ? "" : "s"} in your cart
                 </p>
               </header>

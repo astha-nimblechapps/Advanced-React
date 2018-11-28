@@ -1,8 +1,9 @@
 import React from "react";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import User, { LOGGED_USER } from "./User";
+import { TEMP_DATA } from "./Cart";
 
 const ADDCART = styled.button`
   width: 30%;
@@ -48,6 +49,16 @@ const ADD_TO_TEMP_CART = gql`
  */
 
 class AddCart extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      tokenId: ""
+    };
+
+   
+  }
+  
   addToTempCart = async (e, addToTempCart) => {
     e.preventDefault();
     if (
@@ -58,43 +69,26 @@ class AddCart extends React.Component {
     ) {
       alert("Please Select Color and Size both");
     } else {
-      if (localStorage.getItem("randomId")) {
-        console.log("true");
-        const value = await addToTempCart({
-          variables: {
-            id: this.props.id,
-            token: localStorage.getItem("randomId").toString(),
-            color: this.props.color,
-            size: this.props.size
-          }
-        }).catch(err => {
-          console.log(err.message);
-        });
-        console.log(value);
-      } else {
-        console.log("false");
-        const min = 1;
-        const max = 100;
-        const rand = min + Math.random() * (max - min);
-        // console.log(rand)
-        this.setState({ token: rand });
-        localStorage.setItem("randomId", rand);
-        console.log(JSON.stringify(localStorage.getItem("randomId")));
-        const value = await addToTempCart({
-          variables: {
-            id: this.props.id,
-            token: localStorage.getItem("randomId").toString(),
-            color: this.props.color,
-            size: this.props.size
-          }
-        }).catch(err => {
-          console.log(err.message);
-        });
-        console.log(value);
-      }
+      await addToTempCart({
+        variables: {
+          id: this.props.id,
+          token: localStorage.getItem("randomId").toString(),
+          color: this.props.color,
+          size: this.props.size
+        }
+      }).catch(err => {
+        console.log(err.message);
+      });
     }
   };
 
+  componentDidMount() {
+    if (localStorage.getItem("randomId")) {
+      this.setState({
+        tokenId: localStorage.getItem("randomId").toString()
+      });
+    }
+  }
   render() {
     const id = this.props.id;
 
@@ -119,7 +113,17 @@ class AddCart extends React.Component {
             );
           else {
             return (
-              <Mutation mutation={ADD_TO_TEMP_CART}>
+              <Mutation
+                mutation={ADD_TO_TEMP_CART}
+                refetchQueries={[
+                  {
+                    query: TEMP_DATA,
+                    variables: {
+                      token: this.state.tokenId ? this.state.tokenId : "123"
+                    }
+                  }
+                ]}
+              >
                 {(addToTempCart, { loading }) => (
                   <ADDCART
                     disabled={loading}
@@ -136,6 +140,16 @@ class AddCart extends React.Component {
     );
   }
 }
+
+/**
+ * refetchQueries={() => {
+      console.log("refetchQueries", product.id)
+        return {
+            query: GET_TODOS_BY_PRODUCT,
+            variables: { id: product.id }
+        };
+    }}
+ */
 
 export default AddCart;
 export { ADD_TO_CART, ADDCART, ADD_TO_TEMP_CART };

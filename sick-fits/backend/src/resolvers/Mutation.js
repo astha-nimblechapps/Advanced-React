@@ -82,7 +82,6 @@ const Mutations = {
     if (!user) {
       throw new Error("Email and password is incorrect");
     }
-    console.log(token);
     if (token) {
       const tempCartItem = await ctxt.db.query.tempCartItems(
         {
@@ -94,6 +93,7 @@ const Mutations = {
       if (tempCartItem) {
         const cart = await tempCartItem.map(
           async (cartItem) =>{
+            
             const order = await ctxt.db.mutation.createCartItem(
               {
                 data: {

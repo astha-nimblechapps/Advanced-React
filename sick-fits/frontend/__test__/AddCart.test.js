@@ -103,7 +103,7 @@ describe("<AddToCart/>", () => {
             quantity: 1,
             color: "black",
             size: "22",
-            __typename: "Item",
+            __typename: "TempCartItem",
           }
         }
       }
@@ -137,17 +137,7 @@ describe("<AddToCart/>", () => {
   wrapper.find('button').simulate('click', { preventDefault() {}, moks })
 
   await wait(50);
-  //   const button = wrapper.find("button");
-  //   // button.props.arguments({ preventDefault() {},createOrderMock })
-  //   console.log(button.simulate('click', { preventDefault() {}, moks }))
-  //   // // const createOrderMock = jest.fn().mockResolvedValue({
-  //   // //   data: { addToTempCart: {  id: "abc", token: localStorage.setItem("randomId", "123456"), color: "black", size: "22" } },
-  //   // // });
-  //   // //, { preventDefault() {},createOrderMock }
-  //   // wrapper.find("button").simulate('click')
-  //   // await wait();
-  //   const data  = await apolloClient.query({ query: TEMP_DATA, variables:{ token: "absjk"} });
-  //  console.log(data)
+  wrapper.update(); 
   });
 
   it("change add to adding", async () => {

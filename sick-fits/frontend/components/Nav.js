@@ -41,6 +41,19 @@ class Nav extends React.Component {
       this.setState({
         tokenId: localStorage.getItem("randomId").toString()
       })
+    }else{
+      if(!localStorage.getItem("randomId")){
+        const min = 1;
+        const max = 100;
+        const rand = min + Math.random() * (max - min);
+        // console.log(rand)
+  
+        localStorage.setItem("randomId", rand);
+        this.setState({
+          tokenId: rand.toString()
+        });
+        console.log("Token" + this.state.tokenId);4
+      }
     }
     // this.setState({
     //   randomUser: localStorage.getItem("randomId")
@@ -98,10 +111,7 @@ class Nav extends React.Component {
                 ({data, loading, error}) =>{
                   const cart = data.tempCartItem;
                   console.log(cart)
-                  if(!cart) return <button>
-                  Cart
-                  <CartCount count={0}></CartCount>
-                </button>;
+                  if(!cart) return null
                   return  <Mutation mutation={TOOGLE_CART}>
                   {toogleCart => (
                     <button onClick={toogleCart}>
