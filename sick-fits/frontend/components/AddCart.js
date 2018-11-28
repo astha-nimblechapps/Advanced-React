@@ -48,14 +48,14 @@ const ADD_TO_TEMP_CART = gql`
  */
 
 class AddCart extends React.Component {
-  addTempCart = async (e, addTempCart) => {
+  addTempCart = async (e, addToTempCart) => {
     e.preventDefault();
     if (this.props.color === '' || this.props.size === '' || this.props.color === 'none' || this.props.size === 'none') {
       alert("Please Select Color and Size both")
     } else {
       if (localStorage.getItem("randomId")) {
         console.log("true");
-        await addTempCart({
+        await addToTempCart({
           variables: {
             id: this.props.id,
             token: localStorage.getItem("randomId"),
@@ -71,8 +71,8 @@ class AddCart extends React.Component {
         // console.log(rand)
         this.setState({ token: rand });
         localStorage.setItem("randomId", rand);
-        // console.log(JSON.stringify(localStorage.getItem("randomId")))
-        await addTempCart({
+         console.log(JSON.stringify(localStorage.getItem("randomId")))
+        await addToTempCart({
           variables: {
             id: this.props.id,
             token: localStorage.getItem("randomId"),
@@ -127,4 +127,4 @@ class AddCart extends React.Component {
 }
 
 export default AddCart;
-export { ADD_TO_CART, ADDCART };
+export { ADD_TO_CART, ADDCART, ADD_TO_TEMP_CART };

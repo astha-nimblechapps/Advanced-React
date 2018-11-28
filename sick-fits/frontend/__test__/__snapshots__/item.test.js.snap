@@ -45,9 +45,9 @@ exports[`<IIem/> renders and match snapshot  1`] = `
          Edit 
       </a>
     </Link>
-    <AddCart
-      id="ABC"
-    />
+    <User>
+      <Component />
+    </User>
     <DeleteItem
       id="ABC"
     >
