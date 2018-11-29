@@ -1,0 +1,184 @@
+.pullout {
+  position: relative;
+  width: 345px;
+  float: left;
+  top: 0;
+  background: #fff;
+  -webkit-box-shadow: 0 0 6px -1px rgba(78, 92, 110, 0.25);
+  box-shadow: 0 0 6px -1px rgba(78, 92, 110, 0.25);
+
+  .nav-sidebar {
+    width: 100%;
+    display: block;
+    position: relative;
+
+    hr {
+      width: 100%;
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px solid #F0F2F4;
+    }
+
+    .avatar_section {
+      padding-top: 20px;
+      text-align: center;
+      display: block;
+
+      h5 {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 28px;
+      }
+
+      p {
+        margin: 10px 0 30px;
+      }
+
+      .avatar {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .nav-sidebar-pad {
+      width: 100%;
+      display: block;
+      position: relative;
+      padding: 20px 30px 15px;
+
+      .address {
+        margin: 10px 0;
+        padding: 0;
+        width: 100%;
+        display: block;
+
+        li {
+          display: block;
+          width: 100%;
+          list-style: none;
+          margin: 10px 0;
+          padding: 0;
+          position: relative;
+
+          a {
+            position: relative;
+            padding-left: 30px;
+            padding-top: 5px;
+            display: inline-block;
+
+            span {
+              position: absolute;
+              left: 0;
+              top: 0;
+              font-size: 24px;
+              display: inline-block;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      .nomination {
+        margin: 10px 0;
+        padding: 0;
+        width: 100%;
+        display: block;
+
+        li {
+          display: block;
+          width: 100%;
+          list-style: none;
+          margin: 5px 0;
+          position: relative;
+
+          div:nth-child(1) {
+            width: 50%;
+            font-family: 'DINRoundPro-Medi' ,sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #626B76;
+            display: inline-block;
+
+            span {
+              font-size: 25px;
+              position: relative;
+              top: 6px;
+              display: inline-block;
+            }
+          }
+
+          div:nth-child(2) {
+            width: 25%;
+            font-family: 'IBMPlexMono' ,sans-serif;
+            font-size: 13px;
+            color: #626B76;
+            display: inline-block;
+            padding-top: 5px;
+          }
+
+          div:nth-child(3) {
+            width: 25%;
+            text-align: right;
+            display: inline-block;
+            padding-top: 1px;
+            position: relative;
+            top: 2px;
+          }
+        }
+      }
+
+      .nav-sidebar-footer {
+        margin: 0;
+        padding: 0 0 15px;
+        display: block;
+
+        li {
+          list-style: none;
+          display: inline-block;
+          width: 50%;
+
+          &:first-child {
+            padding-right: 10px;
+          }
+
+          &:last-child {
+            padding-left: 10px;
+          }
+
+          .btn {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .bio-text {
+      p.din_pro_reg_16 {
+        color: #9AA2AF;
+        margin: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+    }
+
+    .add-text {
+      p {
+        color: #9AA2AF;
+        margin: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+    }
+
+    .nomi-text {
+      p {
+        color: #9AA2AF;
+        margin: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

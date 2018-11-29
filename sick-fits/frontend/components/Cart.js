@@ -97,7 +97,7 @@ class Cart extends React.Component {
               <CloseButton onClick={toogleCart} title="close">
                 &times;
               </CloseButton>
-              <Supreme>Your Cart</Supreme>
+              <Supreme>Cart</Supreme>
               <p>
                 You have {cart.length} item
                 {cart.length === 1 ? "" : "s"} in your cart
@@ -132,7 +132,7 @@ class Cart extends React.Component {
                 <CloseButton onClick={toogleCart} title="close">
                   &times;
                 </CloseButton>
-                <Supreme>Your Cart</Supreme>
+                <Supreme>Cart</Supreme>
                 <p>
                   You have {me.cart.length} item
                   {me.cart.length === 1 ? "" : "s"} in your cart

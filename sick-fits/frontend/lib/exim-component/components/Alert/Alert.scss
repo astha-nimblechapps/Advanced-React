@@ -1,0 +1,21 @@
+.alert {
+  border-radius: 4px;
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'DINRoundPro' ,sans-serif;
+  color: #fff;
+  padding: 8.5px 25px 10.5px 25px;
+}
+
+.alert-success {
+  background: #34B47E;
+}
+
+.alert-caution {
+  background: #F6BE7D;
+}
+
+.alert-error {
+  background: #CC4149;
+}

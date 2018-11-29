@@ -37,6 +37,21 @@ const Mutations = {
       info
     );
   },
+  updateUser(parent, args, ctxt, info) {
+    console.log(args)
+    
+    const update = { ...args };
+    delete update.id;
+    return ctxt.db.mutation.updateUser(
+      {
+        data: update,
+        where: {
+          id: args.id
+        }
+      },
+      info
+    );
+  },
   async deleteItem(parent, args, ctxt, info) {
     const where = { id: args.id };
     const item = await ctxt.db.query.item({ where }, `{ id title user{ id }}`);
@@ -89,7 +104,7 @@ const Mutations = {
         },
         `{ id, item { id }, quantity, color, size}`
       );
-      console.log(tempCartItem);
+     
       if (tempCartItem) {
         const cart = await tempCartItem.map(
           async (cartItem) =>{
@@ -123,7 +138,7 @@ const Mutations = {
             }
             return order
             })
-        console.log(cart);
+        
       }
     }
     const valid = await bcrypt.compare(password, user.password);

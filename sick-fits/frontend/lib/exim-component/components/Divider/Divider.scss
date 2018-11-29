@@ -1,0 +1,24 @@
+.divider {
+    width: 100%;
+    float: left;
+    display: block;
+    unicode-bidi: isolate;
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+}
+
+.divider-primary {
+  border-top: 1px solid #E0E3E8;
+}
+
+.divider-secondary {
+  border-top: 1px solid #F0F2F4;
+}

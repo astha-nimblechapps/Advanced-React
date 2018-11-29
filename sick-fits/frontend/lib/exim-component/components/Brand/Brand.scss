@@ -1,0 +1,77 @@
+.brand {
+  display: inline-block;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.brand-logo {
+  width: 70px;
+  height: 20px;
+}
+
+.brand-logo.brand-exim {
+  background-image: url("../../images/exim-logo.svg");
+}
+
+.brand-logo.brand-dark {
+  background-image: url("../../images/exim-dark.svg");
+}
+
+.brand-logo.brand-blue {
+  background-image: url("../../images/exim-blue.svg");
+}
+
+.brand-logo.brand-white {
+  background-image: url("../../images/exim-white.svg");
+}
+
+.brand-logo.brand-blue-on-white {
+  background-image: url("../../images/exim-white-blue.svg");
+  width: 200px;
+  height: 44px;
+}
+
+.brand-token {
+  width: 28px;
+  height: 28px;
+}
+
+.brand-token.brand-white {
+  background-image: url("../../images/token-white.svg");
+}
+
+.brand-token.brand-black {
+  background-image: url("../../images/token-black.svg");
+}
+
+.brand-token.brand-blue {
+  background-image: url("../../images/token-blue.svg");
+}
+
+.brand-token-circle {
+  width: 28px;
+  height: 28px;
+}
+
+.brand-token-circle.brand-black-on-white {
+  background-image: url("../../images/circle-black-white.svg");
+}
+
+.brand-token-circle.brand-white-on-black {
+  background-image: url("../../images/circle-white-black.svg");
+}
+
+.brand-token-circle.brand-blue-on-white {
+  background-image: url("../../images/circle-blue-white.svg");
+}
+
+.brand-token-circle.brand-white-on-blue {
+  background-image: url("../../images/circle-white-blue.svg");
+}

@@ -1,0 +1,51 @@
+.right-sidebar {
+  width: 220px;
+
+  .btn-primary {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+.ul_vote {
+  margin: 0;
+  padding: 10px 0;
+  width: 100%;
+  float: left;
+  position: relative;
+  display: block;
+}
+
+.ul_vote + .ul_vote {
+  border-top: 1px solid #E0E3E8;
+}
+
+.ul_vote li {
+  position: relative;
+  list-style: none;
+  display: block;
+  float: left;
+  text-align: left;
+  width: 100%;
+  padding-right: 50px;
+  margin: 3px 0;
+}
+
+.ul_vote li span {
+  font-size: 14px;
+  color: #626B76;
+  font-family: 'DINRoundPro' ,sans-serif;
+}
+
+.ul_vote li:first-child span {
+  color: #2B333F;
+  font-size: 14px;
+  font-family: 'DINRoundPro-Medi' ,sans-serif;
+}
+
+.ul_vote li span + span {
+  position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -82,7 +82,11 @@ class SignIn extends Component {
                   <a>Forgot Password.?</a>
                 </Link>
                 <br />
-                <button style={{ marginTop: 10 }} type="submit">
+                <button
+                  style={{ marginTop: 10 }}
+                  disabled={loading}
+                  type="submit"
+                >
                   Sign In!
                 </button>
               </fieldset>

@@ -79,13 +79,16 @@ class Nav extends React.Component {
           </Link>
           {me && (
             <>
+            {
+               me.permissions.includes("ADMIN") && 
               <Link href="/sell">
                 <a> Sell </a>
               </Link>
+            }
               <Link href="/orders">
                 <a> My Orders </a>
               </Link>
-              <Link href="/permission">
+              <Link href="/myaccount">
                 <a>My Account</a>
               </Link>
               <SignOut />

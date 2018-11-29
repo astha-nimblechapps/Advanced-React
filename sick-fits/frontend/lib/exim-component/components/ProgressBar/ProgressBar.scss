@@ -1,0 +1,38 @@
+.progress {
+  height: 23px;
+  margin: 0;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #F0F2F4;
+  border-radius: 15px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+
+  .progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 13px;
+    line-height: 23px;
+    color: #fff;
+    text-align: center;
+    background-color: #214885;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: width 0.6s ease;
+    -o-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+    border-radius: 15px;
+    font-family: 'IBMPlexMono-Medium' ,sans-serif;
+  }
+
+  span {
+    width: 100%;
+    float: left;
+    color: #2B333F;
+    margin: 5px 0;
+    font-family: 'DINRoundPro' ,sans-serif;
+    font-size: 14px;
+  }
+}

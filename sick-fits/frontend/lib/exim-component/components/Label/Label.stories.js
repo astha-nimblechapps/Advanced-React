@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
+var react_1 = require("@storybook/react");
+var Label_1 = require("./Label");
+var utils_1 = require("../../utils");
+var react_2 = require("@storybook/addon-knobs/react");
+var lbl_color = 'type';
+var colorDefaultValue = 'green';
+var colorGroupId = 'style';
+var colorOptions = ['green', 'purple', 'yellow', 'blue', 'red', 'darkNeutral', 'lightNeutral', 'sent', 'pending', 'received'];
+var lbl_status = 'status';
+var statusDefaultValue = 'sent';
+var statusGroupId = 'sent';
+var statusOptions = ['sent', 'pending', 'received'];
+var lbl_size = 'size';
+var sizeDefaultValue = 'small';
+var sizeGroupId = 'size';
+var sizeOptions = ['small', 'big'];
+react_1.storiesOf("Components/Label", module).addWithJSX("Eximchain Label Color", utils_1.wInfo("\n    ### Note\n    example Label story\n    ### Usage\n    ~~~js\n    <Label\n      size={'big'}\n      ....\n      green={true}\n    />\n    ~~~")(function () { return (React.createElement(Label_1.Label, { outline: react_2.boolean("outline", false), size: react_2.select(lbl_size, sizeOptions, sizeDefaultValue, sizeGroupId), color: react_2.select(lbl_color, colorOptions, colorDefaultValue, colorGroupId) }, react_2.text("Label Text", "Text"))); })).addWithJSX("Eximchain Label Status", utils_1.wInfo("\n    ### Note\n    example Label story\n    ### Usage\n    ~~~js\n    <Label\n      size={'big'}\n      ....\n      status={sent}\n    />\n    ~~~")(function () { return (React.createElement(Label_1.Label, { status: react_2.select(lbl_status, statusOptions, statusDefaultValue, statusGroupId) }, react_2.text("Label Text", "Text"))); }));
+//# sourceMappingURL=Label.stories.js.map

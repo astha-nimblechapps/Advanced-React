@@ -1,0 +1,121 @@
+.list {
+  position: relative;
+  width: 100%;
+  float: left;
+
+  .list-primary {
+    position: relative;
+    width: 100%;
+    float: left;
+    border-bottom: 1px solid #E0E3E8;
+    margin: 0;
+    padding: 0 0 18px;
+    color: #2B333F;
+    font-size: 20px;
+    font-family: 'DINRoundPro-Medi' ,sans-serif;
+  }
+
+  .list-secondary {
+    position: relative;
+    width: 100%;
+    float: left;
+    padding: 19px 0;
+    margin: 0;
+    color: #9AA2AF;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: 'DINRoundPro-Medi' ,sans-serif;
+    border-bottom: 1px solid #E0E3E8;
+  }
+
+  .list-content {
+    position: relative;
+    width: 100%;
+    float: left;
+
+    ul {
+      position: relative;
+      width: 100%;
+      float: left;
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        width: 100%;
+        font-family: 'IBMPlexMono-Medium' ,sans-serif;
+        font-size: 13px;
+        border-bottom: 1px solid #E0E3E8;
+        float: left;
+
+          .list-column-one {
+            width: 25%;
+            padding: 10px 15px;
+            float: left;
+
+            p {
+              float: left;
+              margin-left: 15px;
+            }
+
+          }
+          .list-column-two {
+            width: 25%;
+            padding: 10px 15px;
+            float: left;
+
+            .rectangle {
+              background: #214885;
+              border-radius: 12px;
+              height: 12px;
+              margin: 13px 0;
+            }
+
+          }
+          .list-column-three {
+            width: 25%;
+            padding: 10px 15px;
+            float: left;
+            text-align: right;
+          }
+          .list-column-four {
+            width: 25%;
+            float: left;
+            padding: 10px 15px;
+            text-align: right;
+          }
+
+          .avatar {
+            top: 1px;
+            position: relative;
+            float: left;
+
+            img {
+              width: 38px;
+            }
+          }
+
+          &:hover {
+            background: #F7F8F9;
+            cursor: default;
+
+            .btn-small:first-child {
+              opacity: 1;
+            }
+          }
+        }
+    }
+
+    .btn-small:first-child {
+      opacity: 0;
+      margin-top: 5px;
+      padding: 6px 29px !important;
+      margin-right: 20px;
+    }
+
+    .btn-small:last-child {
+      margin-top: 5px;
+      padding: 6px 10px !important;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { LOGGED_USER } from "./User";
 import { TEMP_DATA } from "./Cart";
 import React, { Component } from "react";
+import Router from "next/router";
 
 const SIGNOUT = gql`
   mutation SIGNOUT {
@@ -16,6 +17,15 @@ class SignOut extends Component {
   state = {
     tokenId: ""
   };
+
+  signOut = async (e, signout) => {
+    e.preventDefault();
+    await signout();
+    Router.push({
+      pathname: "/items"
+    });
+  };
+
   componentDidMount() {
     if (localStorage.getItem("randomId")) {
       this.setState({ tokenId: localStorage.getItem("randomId").toString() });
@@ -37,7 +47,7 @@ class SignOut extends Component {
         ]}
       >
         {(signout, { error, loading }) => (
-          <button onClick={signout}>Sign Out</button>
+          <button onClick={e => this.signOut(e, signout)}>Sign Out</button>
         )}
       </Mutation>
     );

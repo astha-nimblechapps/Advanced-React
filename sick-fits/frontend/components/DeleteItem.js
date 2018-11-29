@@ -5,7 +5,7 @@ import { ALL_ITEMS_QUERY } from './Items';
 import styled from 'styled-components';
 import { GET_ALL_ITEMS } from './Items'
 const DeleteBtn = styled.button`
-    width: 100%;
+    width: 50%;
     border: 1px solid;
     text-align: center;
     font-family: none;

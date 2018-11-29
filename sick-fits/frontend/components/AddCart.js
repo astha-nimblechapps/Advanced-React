@@ -6,11 +6,11 @@ import User, { LOGGED_USER } from "./User";
 import { TEMP_DATA } from "./Cart";
 
 const ADDCART = styled.button`
-  width: 30%;
-  /* border: 1px solid; */
-  text-align: center;
-  font-family: none;
-  border: none;
+     background: white;
+    border: 1px solid;
+    /* font-size: 1rem; */
+    padding: 1rem;
+    width: 50%;
 `;
 
 const ADD_TO_CART = gql`

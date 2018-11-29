@@ -52,24 +52,45 @@ class Item extends Component {
                 </PriceTag>
                 <p>{ item.description }</p>
               
-                <div className="buttonList">
-                    <Link href={{ pathname:'/update', query: { id: item.id } }}>
-                        <a> Edit </a>
-                    </Link>
+              
+                  
                     {
                         <User>
                             {
                                ({ data: { me } }) => {
-                                   if(!me) return <ADDCART onClick={() => this.addToCart(item.id)}> Add To Cart</ADDCART> 
-                                   return <AddCart id={item.id}></AddCart>
+                                if(me){
+                                    return(
+                                        <div className="buttonList">
+                                            {
+                                                me.permissions.includes("ADMIN") &&  <Link href={{ pathname:'/update', query: { id: item.id } }}>
+                                                <a> Edit </a>
+                                            </Link>
+                                            }
+                                       
+                                    <AddCart id={item.id}></AddCart>
+                                    {
+                                                me.permissions.includes("ADMIN") &&     <DeleteItem id={item.id}>Delete</DeleteItem>
+                                            }
+                                 
+                                    </div>
+                                    )
+                                }else{
+                                    return(
+                                        <div className="buttonList">
+                                        
+                                    <ADDCART onClick={() => this.addToCart(item.id)}> Add To Cart</ADDCART>
+                                   
+                                    </div>
+                                    )
+                                }
                                }
                             }
                         </User>
                     }
                     
-                    <DeleteItem id={item.id}>Delete</DeleteItem>
+                 
               
-                </div>
+              
                  
             </ItemStyle>
         );

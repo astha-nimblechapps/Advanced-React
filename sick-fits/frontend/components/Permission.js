@@ -14,8 +14,8 @@ const possiblePermissions = [
   'PERMISSIONUPDATE',
 ];
 
-const UPDATE_PERMISSIONS = gql`
-  mutation UPDATE_PERMISSIONS($permissions: [Permission], $userId: ID!) {
+const UPDATE_PERMISSIONS_MUTATION = gql`
+  mutation updatePermissions($permissions: [Permission], $userId: ID!) {
     updatePermissions(permissions: $permissions, userId: $userId) {
       id
       permissions
@@ -89,7 +89,7 @@ class UserPermissions extends React.Component {
     const user = this.props.user;
     return (
       <Mutation
-        mutation={UPDATE_PERMISSIONS}
+        mutation={UPDATE_PERMISSIONS_MUTATION}
         variables={{
           permissions: this.state.permissions,
           userId: this.props.user.id,

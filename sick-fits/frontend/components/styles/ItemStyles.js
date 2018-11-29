@@ -26,14 +26,14 @@ const Item = styled.div`
   }
   .buttonList {
     text-align: center;
-    width: 30%;
+    width: 100%;
     float: left;
-    & > * {
-      background: white;
-      border: 0;
-      font-size: 1rem;
-      padding: 1rem;
-    }
+    display: flex;
+   a{
+     width: 30%;
+    line-height: 2.6;
+    border: 1px solid;
+   }
   }
   .cartBtn{
     border: none;

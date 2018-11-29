@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import { format } from 'date-fns';
-import Head from 'next/head';
-import gql from 'graphql-tag';
-import formatMoney from '../lib/formatMoney';
-import Error from './ErrorMessage';
-import OrderStyles from './styles/OrderStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import { Query } from "react-apollo";
+import { format } from "date-fns";
+import Head from "next/head";
+import gql from "graphql-tag";
+import formatMoney from "../lib/formatMoney";
+import Error from "./ErrorMessage";
+import OrderStyles from "./styles/OrderStyles";
 
 const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
@@ -32,7 +32,7 @@ const SINGLE_ORDER_QUERY = gql`
 
 class Order extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
   };
   render() {
     return (
@@ -56,7 +56,7 @@ class Order extends React.Component {
               </p>
               <p>
                 <span>Date</span>
-                <span>{format(order.createdAt, 'MMMM d, YYYY h:mm a')}</span>
+                <span>{format(order.createdAt, "MMMM d, YYYY h:mm a")}</span>
               </p>
               <p>
                 <span>Order Total</span>
@@ -81,8 +81,7 @@ class Order extends React.Component {
                 ))}
               </div>
             </OrderStyles>
-         
-         );
+          );
         }}
       </Query>
     );

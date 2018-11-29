@@ -1,0 +1,23 @@
+export declare type BrandStyleOptions = 'exim' | 'dark' | 'white' | 'blue' | 'black' | 'whiteOnBlue' | 'whiteOnBlack' | 'blueOnWhite' | 'blackOnWhite';
+export declare type ButtonSizeOptions = 'large' | 'medium';
+export declare type ButtonTypeOptions = 'button' | 'submit' | 'reset';
+export declare type AddressIconOptions = 'add' | 'blockmaker' | 'chevronLeft' | 'close' | 'cycle' | 'demotion' | 'filte' | 'governanceCycle' | 'help' | 'home' | 'listView' | 'media' | 'members' | 'more' | 'node' | 'notificationBell' | 'promotion' | 'remove' | 'search' | 'settings' | 'upload' | 'user' | 'vote' | 'arrowDown';
+export declare type ButtonGroupSizeOptions = 'small' | 'medium' | 'large';
+export declare type CalloutPlacementOptions = 'left' | 'middle' | 'right';
+export declare type ValidationStateOptions = 'success' | 'warning' | 'error';
+export declare type IconOptions = 'add' | 'blockmaker' | 'chevronLeft' | 'close' | 'cycle' | 'demotion' | 'filte' | 'governanceCycle' | 'help' | 'home' | 'listView' | 'media' | 'members' | 'more' | 'node' | 'notificationBell' | 'promotion' | 'remove' | 'search' | 'settings' | 'upload' | 'user' | 'vote' | 'arrowDown';
+export declare type InputTypeOptions = 'text' | 'password' | 'number' | 'email' | 'select';
+export declare type LabelSizeOptions = 'big' | 'small';
+export declare type ModalSizeOptions = 'small' | 'medium' | 'large';
+export declare type ModalBackdropOptions = 'static' | true | false;
+export declare type TypographyOptions = 'subtitle' | 'subtitleSmall' | 'content' | 'contentSmall' | 'caption' | 'button' | 'buttonSmall' | 'plexMonoReg' | 'plexMonoMed';
+export declare type LabelColorOptions = "green" | "purple" | "yellow" | "blue" | "red" | "darkNeutral" | "lightNeutral";
+export declare type LabelStatusOptions = "sent" | "pending" | "received";
+export declare const COLORS: {
+    NEUTRALS: string[];
+    BLUES: string[];
+    STATES: string[];
+};
+export declare const ValidationClasses: string[];
+export declare function prefix(baseClass: any, style: string): string;
+export declare function getValidationClass(validationState: string): string;
