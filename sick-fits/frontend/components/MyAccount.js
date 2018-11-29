@@ -6,7 +6,7 @@ import Permission from "./Permission";
 import Error from "./ErrorMessage";
 import MyAccountStyle from "./styles/MyAccountStyle";
 import Head from "next/head";
-import { Typography} from "./../lib/exim-component"; 
+import { Label, ButtonLink } from '../lib/exim-component';
 import { from } from "zen-observable";
 
 const UPDATE_USER = gql`
@@ -32,17 +32,17 @@ class MyAccount extends Component {
 
   updateUser = async (e, updateUser, val) => {
     e.preventDefault();
-    console.log(val);
+    //console.log(val);
 
     if (this.state.edit) {
-      console.log("True");
+      //console.log("True");
       this.setState({
         edit: false,
         email: val.email,
         name: val.name
       });
     } else {
-      console.log("False");
+      //console.log("False");
       this.setState({
         edit: true
       });
@@ -56,7 +56,7 @@ class MyAccount extends Component {
         }
       });
 
-      console.log(user);
+      //console.log(user);
     }
   };
 
@@ -69,8 +69,8 @@ class MyAccount extends Component {
     return (
       <User>
         {({ data: { me } }) => {
-            console.log(me)
-            console.log(me.permissions.includes("ADMIN"))
+          //console.log(me)
+          //console.log(me.permissions.includes("ADMIN"))
           if (!me) return <p> No Details Found </p>;
           return (
             <Mutation
@@ -85,8 +85,8 @@ class MyAccount extends Component {
                     </Head>
 
                     <p>
-                      <Typography useFor="caption">Name:</Typography>
-                      <span>
+                      <Label>Name:</Label>
+                      <Label>
                         {this.state.edit ? (
                           me.name
                         ) : (
@@ -102,19 +102,21 @@ class MyAccount extends Component {
                             onChange={this.handleChange}
                           />
                         )}
-                      </span>
-                      <div style={{ float: "right", padding: 0 }}>
-                        <button
-                          style={{ border: "none" }}
+                      </Label>
+                      <Label className="edt-btn" color="darkNeutral">
+                     
+                        <ButtonLink
+                        className="an"
+                          
                           onClick={e => this.updateUser(e, updateUser, me)}
                         >
                           {this.state.edit ? "Edit" : "Update"}
-                        </button>
-                      </div>
+                        </ButtonLink>
+                      </Label>
                     </p>
                     <p>
-                      <span>Email:</span>
-                      <span>
+                      <Label>Email:</Label>
+                      <Label>
                         {this.state.edit ? (
                           me.email
                         ) : (
@@ -129,15 +131,16 @@ class MyAccount extends Component {
                             onChange={this.handleChange}
                           />
                         )}
-                      </span>
+                      </Label>
                     </p>
-                  
-                        {
-                            me.permissions.includes("ADMIN") &&  <p> <span>Permission:</span>
-                      <Permission /> </p>
-                        }
-                     
-               
+
+                    {me.permissions.includes("ADMIN") && (
+                      <div>
+                        {" "}
+                        <Label>Permission:</Label>
+                        <Permission />{" "}
+                      </div>
+                    )}
                   </MyAccountStyle>
                 );
               }}

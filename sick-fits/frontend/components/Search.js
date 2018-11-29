@@ -24,7 +24,7 @@ class Search extends Component {
     }
 
     routeToItem(item){
-        console.log(item)
+        //console.log(item)
         Router.push({
             pathname:'/item',
             query:{
@@ -40,7 +40,7 @@ class Search extends Component {
             variables: { searchTerm: e.target.value }
         });
         this.setState({items: res.data.items, loading: false,})
-        console.log(res)
+       // console.log(res)
     }, 350);
 
     render() {

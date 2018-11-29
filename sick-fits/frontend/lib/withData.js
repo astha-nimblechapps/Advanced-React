@@ -32,7 +32,7 @@ function createClient({ headers }) {
             const {items} = cache.readQuery({
               query: LOCAL_STATE_ITEM,
             });
-            console.log(items);
+            //console.log(items);
           }
         },
       },

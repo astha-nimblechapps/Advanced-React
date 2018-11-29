@@ -1,9 +1,10 @@
 import { Query, Mutation } from 'react-apollo';
 import Error from './ErrorMessage';
 import gql from 'graphql-tag';
-import Table from './styles/Table';
+import TableStyle from './styles/Table';
 import SickButton from './styles/SickButton';
 import PropTypes from 'prop-types';
+import { Button, CheckBox, Table } from '../lib/exim-component';
 
 const possiblePermissions = [
   'ADMIN',
@@ -42,14 +43,14 @@ const Permissions = props => (
       <div>
         <Error error={error} />
         <div>
-          <h2>Manage Permissions</h2>
+        
           <Table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Email</th>
-                {possiblePermissions.map(permission => <th key={permission}>{permission}</th>)}
-                <th>👇🏻</th>
+                <th className='per-tbl'>Name</th>
+                <th className='per-tbl'>Email</th>
+                {possiblePermissions.map(permission => <th className='per-tbl' key={permission}>{permission}</th>)}
+                <th className='per-tbl'>Update</th>
               </tr>
             </thead>
             <tbody>{data.users.map(user => <UserPermissions user={user} key={user.id} />)}</tbody>
@@ -74,14 +75,15 @@ class UserPermissions extends React.Component {
   };
   handlePermissionChange = (e) => {
     const checkbox = e.target;
+    console.log(e.target.checked)
     // take a copy of the current permissions
     let updatedPermissions = [...this.state.permissions];
     // figure out if we need to remove or add this permission
     if (checkbox.checked) {
       // add it in!
-      updatedPermissions.push(checkbox.value);
+      updatedPermissions.push(checkbox.name);
     } else {
-      updatedPermissions = updatedPermissions.filter(permission => permission !== checkbox.value);
+      updatedPermissions = updatedPermissions.filter(permission => permission !== checkbox.name);
     }
     this.setState({ permissions: updatedPermissions });
   };
@@ -104,20 +106,26 @@ class UserPermissions extends React.Component {
               {possiblePermissions.map(permission => (
                 <td key={permission}>
                   <label htmlFor={`${user.id}-permission-${permission}`}>
-                    <input
+                  <CheckBox
+                  name={permission}
+                  checked={this.state.permissions.includes(permission)} onClick={(e) => this.handlePermissionChange(e)}></CheckBox>
+                    {/* <input
                       id={`${user.id}-permission-${permission}`}
                       type="checkbox"
                       checked={this.state.permissions.includes(permission)}
                       value={permission}
                       onChange={this.handlePermissionChange}
-                    />
+                    /> */}
                   </label>
                 </td>
               ))}
               <td>
-                <SickButton type="button" disabled={loading} onClick={updatePermissions}>
-                  Updat{loading ? 'ing' : 'e'}
-                </SickButton>
+                <Button disabled={loading} onClick={updatePermissions} size="medium" className="update-btn">
+                Updat{loading ? 'ing' : 'e'}
+                </Button>
+                {/* <SickButton type="button" disabled={loading} onClick={updatePermissions}>
+                 
+                </SickButton> */}
               </td>
             </tr>
           </>

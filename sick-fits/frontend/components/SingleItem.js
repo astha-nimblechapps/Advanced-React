@@ -59,14 +59,14 @@ class SingleItem extends Component {
         item:'',
       };
       handleChange = e => {
-        console.log(e.target.value)
+       // console.log(e.target.value)
         const { name, type, value } = e.target;
         const val = type === 'number' ? parseFloat(value) : value;
         this.setState({ [name]: val });
       };
 
       addToCart = (val,color,size) =>{
-          console.log(val)
+        //  console.log(val)
           this.setState({ item: val })
       }
     

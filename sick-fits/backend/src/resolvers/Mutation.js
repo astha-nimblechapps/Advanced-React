@@ -38,7 +38,7 @@ const Mutations = {
     );
   },
   updateUser(parent, args, ctxt, info) {
-    console.log(args)
+   // console.log(args)
     
     const update = { ...args };
     delete update.id;
@@ -173,7 +173,7 @@ const Mutations = {
       where: { email: args.email },
       data: { resetToken: resetToken, resetTokenExpiry: resetTokenExpiry }
     });
-    console.log(res);
+   // console.log(res);
     const mailRes = await transport.sendMail({
       from: "demo@gmail.com",
       to: user.email,
@@ -254,7 +254,7 @@ const Mutations = {
       }
     });
     if (existingCartItem) {
-      console.log("This item is already in cart");
+     // console.log("This item is already in cart");
       return ctxt.db.mutation.updateCartItem(
         {
           where: {
@@ -375,7 +375,7 @@ const Mutations = {
       }
     });
     if (existingCartItem) {
-      console.log("This item is already in cart");
+     // console.log("This item is already in cart");
 
       // console.log(existingToken);
       return ctxt.db.mutation.updateTempCartItem(

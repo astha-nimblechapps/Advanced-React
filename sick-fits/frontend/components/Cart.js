@@ -88,7 +88,7 @@ class Cart extends React.Component {
         {({ user, toogleCart, localState, tempCart }) => {
           const me = user.data.me;
           const cart = tempCart.data.tempCartItem;
-          console.log(cart)
+         // console.log(cart)
           if (!me){ 
             if(!cart) return <p> No item</p>
             return ( 

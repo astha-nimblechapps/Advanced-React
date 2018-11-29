@@ -1,0 +1,19 @@
+.update-btn{
+  background-color: #393939 !important;
+  color: #ffffff
+}
+
+.per-tbl{
+  padding: 6px !important;
+}
+
+.edt-btn{
+  float: right; 
+  padding: 0; 
+  margin: 0;  
+  height: 31px !important;
+}
+
+.an{
+  color: #ffffff !important;
+}

@@ -52,7 +52,7 @@ class Nav extends React.Component {
         this.setState({
           tokenId: rand.toString()
         });
-        console.log("Token" + this.state.tokenId);4
+       // console.log("Token" + this.state.tokenId);4
       }
     }
     // this.setState({
@@ -116,7 +116,7 @@ class Nav extends React.Component {
               {
                 ({data, loading, error}) =>{
                   const cart = data.tempCartItem;
-                  console.log(cart)
+                  //console.log(cart)
                   if(!cart) return null
                   return  <Mutation mutation={TOOGLE_CART}>
                   {toogleCart => (

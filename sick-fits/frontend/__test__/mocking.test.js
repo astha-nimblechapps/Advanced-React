@@ -30,7 +30,7 @@ describe('mocking test',() => {
             'book', 'phone'
         ]);
         const itemList  = await me.fetchItem();
-        console.log(itemList);
+       //console.log(itemList);
         expect(itemList).toContain('book')
     });
 });

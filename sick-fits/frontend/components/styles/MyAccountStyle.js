@@ -6,17 +6,17 @@ const MyAccountStyle = styled.div`
   border: 1px solid ${props => props.theme.offWhite};
   box-shadow: ${props => props.theme.bs};
   padding: 2rem;
-  border-top: 10px solid black;
+  border-top: 10px solid #393939;
   & > p {
     width: 100%;
     grid-template-columns: 0fr 0fr;
     margin: 0;
     border-bottom: 1px solid ${props => props.theme.offWhite};
-    span {
+    p {
       padding: 1rem;
       &:first-child {
         font-weight: 900;
-        text-align: right;
+        text-align: left;
       }
     }
   }
