@@ -11,6 +11,7 @@ const OrderItemStyles = styled.div`
       display: inline-block;
     vertical-align: middle;
     width:100%;
+    height:148px;
     }
   .list{
     list-style: none;
@@ -44,6 +45,7 @@ const OrderItemStyles = styled.div`
     float:left;
     img {
       object-fit: cover;
+      height:148px;
     width: 100%;
     border-radius: 0;
     display: inline-block;
