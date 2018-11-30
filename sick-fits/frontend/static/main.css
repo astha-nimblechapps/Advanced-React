@@ -17,3 +17,16 @@
 .an{
   color: #ffffff !important;
 }
+
+.edt-img{
+  text-align: center;
+}
+
+.ls-order{
+  list-style: none;
+}
+
+.p-right{
+  float: right !important;
+  font-weight: 700;
+}

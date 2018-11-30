@@ -5,7 +5,7 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import PropTypes from 'prop-types';
 import { LOGGED_USER } from './User';
-
+import { Label, Input, ButtonLink, Button } from '../lib/exim-component';
 
 const RESET_PASSWORD = gql`
   mutation RESET_PASSWORD($resetToken: String!,$password: String!, $confirmPassword: String!) {
@@ -54,30 +54,30 @@ class ResetPassword extends Component {
                 <Error error={error} />
                 
                 <fieldset disabled={loading} aria-busy={loading}>
-                    <h2>Change Password</h2>
-                        <label htmlFor="password">
-                        Password
-                        <input
+                <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Change Password</h6>
+                  
+                <Label size="small">Password</Label>
+               
+                        <Input
                         type="password"
                         name="password"
                         placeholder="password"
                         value={this.state.password}
                         onChange={this.saveToState}
                         />
-                    </label>
+                
 
-                   <label htmlFor="confirmPassword">
-                        Confirm Password
-                        <input
+                  <Label size="small">  Confirm Password</Label>
+                        <Input
                         type="password"
                         name="confirmPassword"
                         placeholder="confirmPassword"
                         value={this.state.confirm}
                         onChange={this.saveToState}
                         />
-                        </label>
+                    
 
-                    <button type="submit">Reset</button>
+                    <Button type="submit">Reset</Button>
 
                 </fieldset>
             </Form>

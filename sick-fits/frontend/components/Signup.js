@@ -3,8 +3,11 @@ import {Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-import Link from 'next/link';
+import Router from 'next/router';
+import SingIn from './SignIn';
+import { Label, Input, ButtonLink, Button } from '../lib/exim-component';
 import { LOGGED_USER } from './User'
+import SignIn from './SignIn';
 
 const SIGNUP = gql`
   mutation SIGNUP($email: String!, $name: String!, $password: String!) {
@@ -22,13 +25,16 @@ class Signup extends Component {
         email: '',
         name: '',
         password: '',
+        isVissible: false
       };
       saveToState = e => {
         this.setState({ [e.target.name]: e.target.value });
       };
       
+     
     render() {
         return (
+            <div>
             <Mutation mutation={SIGNUP} variables={ this.state } refetchQueries={[
                 {
                     query: LOGGED_USER
@@ -47,49 +53,50 @@ class Signup extends Component {
             }>
                 <Error error={error} />
                 <fieldset disabled={loading} aria-busy={loading}>
-                    <h2>Sign Up for an account</h2>
-                        <label htmlFor="email">
-                        Email
-                        <input
+                    <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Sign Up for an account</h6>
+                    <Label size="small">Email:</Label>
+                        
+                        <Input
                         type="email"
                         name="email"
-                        placeholder="email"
+                        placeholder="Email"
                         value={this.state.email}
                         onChange={this.saveToState}
                         />
-                    </label>
-                    <label htmlFor="name">
-                        Name
-                        <input
+                  <Label size="small">Name:</Label>
+                    
+                      
+                        <Input
                         type="text"
                         name="name"
-                        placeholder="name"
+                        placeholder="Name"
                         value={this.state.name}
                         onChange={this.saveToState}
                         />
-                    </label>
-                    <label htmlFor="password">
-                        Password
-                        <input
+                   <Label size="small">Password:</Label>
+                    
+                        <Input
                         type="password"
                         name="password"
-                        placeholder="password"
+                        placeholder="Password"
                         value={this.state.password}
                         onChange={this.saveToState}
                         />
-                    </label>
-                    <Link href='./signin'>
-                        <a>Login Here</a>
-                    </Link>
+                  
+                    <ButtonLink onClick={() =>  this.setState({ isVissible: true })}> If you already registered.? Login Here</ButtonLink>
                     <br/>
-                    <button style={{ marginTop: 10 }} type="submit">Sign Up!</button>
-
+                    <Button type="submit">Sign Up!</Button>
+                   
                 </fieldset>
             </Form>
                     )
             }
         }
     </Mutation>
+    {
+        this.state.isVissible && <SingIn></SingIn>
+    }
+    </div>
         );
     }
 }

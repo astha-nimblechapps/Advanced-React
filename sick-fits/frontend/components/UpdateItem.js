@@ -7,6 +7,7 @@ import Form from "./styles/Form";
 import formatMoney from "../lib/formatMoney";
 import Error from "./ErrorMessage";
 import { from } from "zen-observable";
+import { Label, Input, Avatar, Button } from '../lib/exim-component';
 
 const SIGNLE_ITEM_QUERY = gql`
   query SIGNLE_ITEM_QUERY($id: ID!) {
@@ -15,6 +16,7 @@ const SIGNLE_ITEM_QUERY = gql`
       title
       description
       price
+      image
     }
   }
 `;
@@ -79,8 +81,10 @@ class UpdateItem extends Component {
                 >
                   <Error error={error} />
                   <fieldset disabled={loading} aria-busy={loading}>
-                    <label htmlFor="title">
-                      Title
+                  <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Edit Item Detail</h6>
+                  <Avatar src={data.item.image}></Avatar>
+                  <Label size="small"> Title:</Label>
+                     
                       <input
                         type="text"
                         id="title"
@@ -90,10 +94,8 @@ class UpdateItem extends Component {
                         defaultValue={data.item.title}
                         onChange={this.handleChange}
                       />
-                    </label>
-
-                    <label htmlFor="price">
-                      Price
+                 
+                 <Label size="small"> Price:</Label>
                       <input
                         type="number"
                         id="price"
@@ -103,10 +105,10 @@ class UpdateItem extends Component {
                         defaultValue={data.item.price}
                         onChange={this.handleChange}
                       />
-                    </label>
+               
 
-                    <label htmlFor="description">
-                      Description
+                   <Label size="small"> Description:</Label>
+                    
                       <textarea
                         id="description"
                         name="description"
@@ -115,8 +117,8 @@ class UpdateItem extends Component {
                         defaultValue={data.item.description}
                         onChange={this.handleChange}
                       />
-                    </label>
-                    <button type="submit">Update</button>
+                   
+                    <Button type="submit">Update</Button>
                   </fieldset>
                 </Form>
               )}

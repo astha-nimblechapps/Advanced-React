@@ -68,6 +68,9 @@ const Mutations = {
     return ctxt.db.mutation.deleteItem({ where }, info);
   },
   async singup(parent, args, ctxt, info) {
+    if(!args){
+      throw new Error("Please enter all details");
+    }
     args.email = args.email.toLowerCase();
     const password = await bcrypt.hash(args.password, 10);
     const user = await ctxt.db.mutation.createUser(
@@ -91,6 +94,9 @@ const Mutations = {
     return user;
   },
   async signin(parent, { email, password, token }, ctxt, info) {
+    if(!email || !password){
+      throw new Error("Please Fill all the details");
+    }
     const user = await ctxt.db.query.user({
       where: { email: email }
     });

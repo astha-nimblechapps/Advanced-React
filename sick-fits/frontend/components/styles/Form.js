@@ -22,15 +22,26 @@ const Form = styled.form`
   font-weight: 600;
   label {
     display: block;
-    margin-bottom: 1rem;
+    padding: 0px;
+    margin-top: 2px;
+  }
+  a{
+    color: #000;
+  }
+  img{
+    height: 80px;
+    width:80px;
+    border-radius: 0px;
   }
   input,
   textarea,
   select {
+    height:28px;
     width: 100%;
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: 13px;
     border: 1px solid black;
+    margin-bottom: 6px;
     &:focus {
       outline: 0;
       border-color: ${props => props.theme.red};
@@ -38,13 +49,10 @@ const Form = styled.form`
   }
   button,
   input[type='submit'] {
-    width: auto;
-    background: red;
+    margin-top: 10px;
+    background: #393939;
     color: white;
-    border: 0;
-    font-size: 2rem;
-    font-weight: 600;
-    padding: 0.5rem 1.2rem;
+    
   }
   fieldset {
     border: 0;
@@ -57,7 +65,7 @@ const Form = styled.form`
       height: 10px;
       content: '';
       display: block;
-      background-image: linear-gradient(to right, #ff3019 0%, #e2b04a 50%, #ff3019 100%);
+      background-image: linear-gradient(to right,#2b333f 0%,#e0e3e8 50%,#2b333f 100%);
     }
     &[aria-busy='true']::before {
       background-size: 50% auto;

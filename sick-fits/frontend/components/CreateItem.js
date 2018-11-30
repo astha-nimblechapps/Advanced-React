@@ -5,7 +5,7 @@ import Router from 'next/router';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
-
+import { Label, Input, Avatar, Button } from '../lib/exim-component';
 
 const ADD_ITEMS = gql`
   mutation ADD_ITEMS(
@@ -77,9 +77,10 @@ class CreateItem extends Component {
           >
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
-              <label htmlFor="file">
-                Image
-                <input
+            <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Add Item</h6>
+            <Label size="small">Image:</Label>
+              
+                <Input
                   type="file"
                   id="file"
                   name="file"
@@ -88,13 +89,13 @@ class CreateItem extends Component {
                   onChange={this.uploadFile}
                 />
                 {this.state.image && (
-                  <img width="100" src={this.state.image} alt="Upload Preview" />
+                  <Avatar src={ this.state.image}></Avatar>
+                  // <img width="100" src={this.state.image} alt="Upload Preview" />
                 )}
-              </label>
-
-              <label htmlFor="title">
-                Title
-                <input
+             
+             <Label size="small"> Title:</Label>
+               
+                <Input
                   type="text"
                   id="title"
                   name="title"
@@ -103,11 +104,11 @@ class CreateItem extends Component {
                   value={this.state.title}
                   onChange={this.handleChange}
                 />
-              </label>
+           
 
-              <label htmlFor="price">
-                Price
-                <input
+             <Label size="small">Price:</Label>
+              
+                <Input
                   type="number"
                   id="price"
                   name="price"
@@ -116,7 +117,7 @@ class CreateItem extends Component {
                   value={this.state.price}
                   onChange={this.handleChange}
                 />
-              </label>
+            
               {/* <label htmlFor="color">
                 Select Color
                     <select 
@@ -141,9 +142,10 @@ class CreateItem extends Component {
                     <option value="24">24</option>
                   </select>
               </label> */}
-              <label htmlFor="description">
-                Description
-                <textarea
+           <Label size="small">Description:</Label>
+                
+                <Input
+                type="text"
                   id="description"
                   name="description"
                   placeholder="Enter A Description"
@@ -151,8 +153,8 @@ class CreateItem extends Component {
                   value={this.state.description}
                   onChange={this.handleChange}
                 />
-              </label>
-              <button type="submit">Submit</button>
+           
+              <Button type="submit">Submit</Button>
             </fieldset>
           </Form>
         )}

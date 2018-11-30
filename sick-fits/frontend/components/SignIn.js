@@ -5,6 +5,7 @@ import Form from "./styles/Form";
 import Error from "./ErrorMessage";
 import { LOGGED_USER } from "./User";
 import Link from "next/link";
+import { Label, Input, ButtonLink, Modal, Button } from '../lib/exim-component';
 
 const SIGNIN = gql`
   mutation SIGNIN($email: String!, $password: String!, $token: String!) {
@@ -17,14 +18,19 @@ const SIGNIN = gql`
 `;
 
 class SignIn extends Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
-    token: ""
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      token: "",
+      isVissible: true,
+    };
+  }
 
   componentDidMount() {
+   
     if (localStorage.getItem("randomId")) {
       this.setState({ token: localStorage.getItem("randomId").toString() });
       // localStorage.clear();
@@ -36,6 +42,10 @@ class SignIn extends Component {
 
   render() {
     return (
+<div>
+      <Modal show={this.state.isVissible}>
+        <Modal.Body>
+      
       <Mutation
         mutation={SIGNIN}
         variables={this.state}
@@ -52,48 +62,50 @@ class SignIn extends Component {
               onSubmit={async e => {
                 e.preventDefault();
                 await signin();
-                this.setState({ email: "", password: "" });
+                this.setState({ email: "", password: "", isVissible: false });
               }}
             >
               <Error error={error} />
               <fieldset disabled={loading} aria-busy={loading}>
-                <h2>Sign In for an account</h2>
-                <label htmlFor="email">
-                  Email
-                  <input
+                <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Sign In for an account</h6>
+                <Label size="small">Email</Label>
+                
+                  <Input
                     type="email"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     value={this.state.email}
                     onChange={this.saveToState}
                   />
-                </label>
-                <label htmlFor="password">
-                  Password
-                  <input
+               
+               <Label size="small">Password</Label>
+                  
+                  <Input
                     type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     value={this.state.password}
                     onChange={this.saveToState}
                   />
-                </label>
-                <Link href="./reset">
-                  <a>Forgot Password.?</a>
-                </Link>
+                
+                <ButtonLink href="./reset">
+                  Forgot Password.?
+                </ButtonLink>
                 <br />
-                <button
-                  style={{ marginTop: 10 }}
+                <Button
                   disabled={loading}
                   type="submit"
                 >
                   Sign In!
-                </button>
+                </Button>
               </fieldset>
             </Form>
           );
         }}
       </Mutation>
+      </Modal.Body>
+      </Modal>
+      </div>
     );
   }
 }

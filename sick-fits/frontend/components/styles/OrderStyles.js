@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const OrderStyles = styled.div`
   max-width: 1000px;
@@ -6,13 +6,12 @@ const OrderStyles = styled.div`
   border: 1px solid ${props => props.theme.offWhite};
   box-shadow: ${props => props.theme.bs};
   padding: 2rem;
-  border-top: 10px solid red;
+  border-top: 10px solid #393939;
   & > p {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 0fr 0fr;
     margin: 0;
     border-bottom: 1px solid ${props => props.theme.offWhite};
-    span {
+    label {
       padding: 1rem;
       &:first-child {
         font-weight: 900;
@@ -20,18 +19,34 @@ const OrderStyles = styled.div`
       }
     }
   }
-  .order-item {
-    border-bottom: 1px solid ${props => props.theme.offWhite};
+  .item-details {
+    float: left;
+    width: 70%;
+    margin-left: 20px;
     display: grid;
-    grid-template-columns: 300px 1fr;
-    align-items: center;
-    grid-gap: 2rem;
-    margin: 2rem 0;
-    padding-bottom: 2rem;
+    p {
+      margin: 0px;
+    }
+    label {
+      font-size: 11px;
+      padding: 0px;
+      font-weight: 600;
+    }
+  }
+  .order-item {
+    display: inline-block;
+    div {
+      &:first-child {
+        width: 20%;
+        float: left;
+        height: 30%;
+      }
+    }
     img {
       width: 100%;
-      height: 100%;
+
       object-fit: cover;
+      border-radius: 0;
     }
   }
 `;

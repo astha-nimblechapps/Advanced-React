@@ -7,6 +7,8 @@ import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 import formatMoney from "../lib/formatMoney";
 import OrderItemStyles from "./styles/OrderItemStyles";
+import { List, Label,Avatar, Typography, ButtonLink, Card } from "../lib/exim-component";
+import Router from "next/router";
 
 const ORDER_LIST = gql`
   query ORDER_LIST {
@@ -21,6 +23,11 @@ const ORDER_LIST = gql`
         image
         price
         quantity
+      }
+      user{
+        name
+        id
+        email
       }
     }
   }
@@ -39,43 +46,62 @@ class OrderList extends React.Component {
         {({ data: { orders }, error, loading }) => {
           if (error) return <Error error={error} />;
           if (loading) return <p>Loading....</p>;
-
+          if (!orders)
+            return (
+              <h6
+                style={{ height: "100%", width: "100%", textAlign: "center" }}
+              >
+                You have {orders.length} orders
+              </h6>
+            );
           return (
             <div>
-              <h2>You have {orders.length} orders</h2>
-              <orderUl>
+           
+              <List className="ls-order">
+              <List.Item>
                 {orders.map(order => (
+                  <Card>
                   <OrderItemStyles key={order.id}>
-                    <Link
-                      href={{
-                        pathname: "/order",
-                        query: { id: order.id }
-                      }}
-                    >
-                      <a>
-                        <div className="order-meta">
-                          <p>
-                            {order.items.reduce((a, b) => a + b.quantity, 0)}{" "}
-                            Items
-                          </p>
-                          <p>{order.items.length} Items</p>
-                          <p>{formatDistance(order.createdAt, new Date())}</p>
-                          <p>{formatMoney(order.total)}</p>
-                        </div>
-                        <div className="images">
+                  
+                    <ButtonLink onClick={() => Router.push({ pathname: "/order", query: { id: order.id }})}>
+                     
+                    <div className="images">
                           {order.items.map(item => (
-                            <img
-                              key={item.id}
-                              src={item.image}
-                              alt={item.title}
-                            />
+                            <Avatar
+                            key={item.id}
+                              src={item.image}/>
                           ))}
                         </div>
-                      </a>
-                    </Link>
+                        <div className="order-meta">
+                       <div className="div-fir">
+                       <Typography useFor="plexMonoReg">
+                            <Label>{order.user.name}</Label>
+                        </Typography>
+                        <Typography className="p-right" useFor="plexMonoReg"><Label>{formatDistance(order.createdAt, new Date())}</Label></Typography>
+                       </div>
+                        <div className="div-sec">
+                        <Typography useFor="plexMonoReg">
+                            <Label>{order.items.reduce((a, b) => a + b.quantity, 0)}{" "}
+                            Items</Label>
+                          </Typography>
+                          <Typography  useFor="plexMonoReg"> <Label>{formatMoney(order.total)} </Label></Typography>
+                          <Typography useFor="plexMonoReg"><Label>{order.items.length} Items </Label></Typography>
+                        </div>
+                         
+                         
+                       
+                          
+                        </div>
+                       
+                      
+                    </ButtonLink>
+                   
                   </OrderItemStyles>
+                  </Card>
                 ))}
-              </orderUl>
+              </List.Item>
+              </List>
+             
             </div>
           );
         }}
