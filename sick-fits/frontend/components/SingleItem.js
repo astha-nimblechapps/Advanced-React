@@ -1,128 +1,177 @@
-import React, { Component } from 'react';
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
-import Head from 'next/head';
-import AddCart from './AddCart';
-import Router from 'next/router';
-import Cart from './Cart';
+import React, { Component } from "react";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import styled from "styled-components";
+import Head from "next/head";
+import AddCart from "./AddCart";
+import {
+  Card,
+  Typography,
+  Divider,
+  Label,
+  Icon
+} from "./../lib/exim-component";
 
 const SINGLE_ITEM = gql`
-    query SINGLE_ITEM($id: ID!){
-        item( where: {id:$id}){
-            id
-            title
-            description
-            largeImage
-            image
-        }
+  query SINGLE_ITEM($id: ID!) {
+    item(where: { id: $id }) {
+      id
+      title
+      description
+      largeImage
+      image
     }
-`;
-const ADDCART = styled.button`
-    width: 30%;
-    /* border: 1px solid; */
-    text-align: center;
-    font-family: none;
-    border: none;
+  }
 `;
 
+const AddCartContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+`;
+
+const ADDCART = styled.button`
+  width: 30%;
+  /* border: 1px solid; */
+  text-align: center;
+  font-family: none;
+  border: none;
+`;
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
-  margin: 2rem auto;
-  box-shadow: ${props => props.theme.bs};
-  display: inline-flex;
+  margin: 0 auto;
+  display: flex;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
-  min-height: 800px;
+  min-height: 500px;
+  h5 {
+    margin: 10px 0;
+  }
   img {
     width: 50%;
     height: 50%;
     object-fit: contain;
   }
+  .divider {
+    border-top: 1px solid #f0f2f4;
+  }
   .details {
-    margin: 0 0 0 15px;
+    position: relative;
+    width: 100%;
+    margin: 0 15px;
     font-size: 2rem;
     h2 {
-        margin: 0;
+      margin: 0;
     }
-    button{
-        border : 1px solid;
+    button {
+      border: 1px solid;
+    }
+    label {
+      min-width: 75px;
+      padding: 4px 8px;
+      margin-right: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+    label > span {
+      display: block;
+    }
+    .label-outline {
+      border: 1px solid #393939;
     }
   }
 `;
 
 class SingleItem extends Component {
-    state = {
-        color:'',
-        size:'',
-        item:'',
-      };
-      handleChange = e => {
-       // console.log(e.target.value)
-        const { name, type, value } = e.target;
-        const val = type === 'number' ? parseFloat(value) : value;
-        this.setState({ [name]: val });
-      };
+  availableColors = ["red", "green", "blue"];
+  availablSize = [20, 24, 28];
+  state = {
+    color: "",
+    size: "",
+    item: ""
+  };
 
-      addToCart = (val,color,size) =>{
-        //  console.log(val)
-          this.setState({ item: val })
-      }
-    
-    render() {
-        return (
-            <div>
-                <Query query={SINGLE_ITEM} variables={{ id: this.props.id }}>
-                    {
-                        ({data,loading,error}) =>{
-                            if(loading) return <p>Loading.....</p>
-                            if(!data.item) return <p> No item found</p>
-                            const item = data.item
-                            return<SingleItemStyles>
-                            <Head>
-                              <title>Sick Fits | {item.title}</title>
-                            </Head>
-                            <img src={item.largeImage} alt={item.title} />
-                            <div className="details">
-                              <h2>Viewing {item.title}</h2>
-                              <p>{item.description}</p>
-                              <label htmlFor="color">
-                                Select Color :
-                                <select 
-                                    name="color"
-                                    value={this.state.color} 
-                                    onChange={this.handleChange}  >
-                                    <option value="none">Please Select Color</option>
-                                <option value="Red">Red</option>
-                                    <option value="Black">Black</option>
-                                    <option value="White">White</option>
-                                </select>
-                                </label>
-                                <br/>
-                                <label htmlFor="size">
-                                Select Size :
-                                <select 
-                                    name="size"
-                                    value={this.state.size} 
-                                    onChange={this.handleChange} >
-                                    <option value="none">Please Select Size</option>
-                                <option value="22">22</option>
-                                    <option value="23">23</option>
-                                    <option value="24">24</option>
-                                </select>
-                                </label>
-                              <AddCart id={item.id} color={this.state.color} size={this.state.size}></AddCart>
-                            </div>
-                            
-                          </SingleItemStyles>
-                        }
-                    }
-                </Query>   
-            </div>
-        );
-    }
+  onSizeChange = val => {
+    console.log(val);
+    this.setState({ size: val });
+  };
+
+  onColorChange = val => {
+    console.log(val);
+    this.setState({ color: val });
+  };
+
+  addToCart = (val, color, size) => {
+    this.setState({ item: val });
+  };
+
+  render() {
+    let { color, size } = this.state;
+    let { id } = this.props.id;
+    console.log(color, size);
+    return (
+      <Query query={SINGLE_ITEM} variables={{ id: this.props.id }}>
+        {({ data, loading, error }) => {
+          if (loading) return <p>Loading.....</p>;
+          if (!data.item) return <p> No item found</p>;
+          const item = data.item;
+          return (
+            <Card>
+              <SingleItemStyles>
+                <Head>
+                  <title>Sick Fits | {item.title}</title>
+                </Head>
+                <img src={item.largeImage} alt={item.title} />
+                <div className="details">
+                  <Typography h5 className="title">
+                    Viewing {item.title}
+                  </Typography>
+                  <Typography useFor="content">{item.description}</Typography>
+                  <Divider />
+                  <div>
+                    <Typography useFor="subtitle">Choose colors</Typography>
+                    {this.availableColors.map((c, i) => (
+                      <Label key={i} color={c}>
+                        <span onClick={this.onColorChange.bind(this, c)}>
+                          {c == color ? <Icon for="add" /> : null}
+                          {c}
+                        </span>
+                      </Label>
+                    ))}
+                  </div>
+                  <div>
+                    <Typography useFor="subtitle">Choose size</Typography>
+                    {this.availablSize.map((s, i) => (
+                      <Label key={i} outline>
+                        <span onClick={this.onSizeChange.bind(this, s)}>
+                          {s == size ? <Icon for="add" /> : null}
+                          {s}
+                        </span>
+                      </Label>
+                    ))}
+                  </div>
+                  <AddCartContainer>
+                    <Divider />
+                    <AddCart
+                      disabled={!color || !size}
+                      id={item.id}
+                      color={this.state.color}
+                      size={this.state.size}
+                    />
+                  </AddCartContainer>
+                </div>
+              </SingleItemStyles>
+            </Card>
+          );
+        }}
+      </Query>
+    );
+  }
 }
 
 export default SingleItem;
-export { SINGLE_ITEM }
+export { SINGLE_ITEM };

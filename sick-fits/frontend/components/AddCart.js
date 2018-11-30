@@ -4,13 +4,14 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 import User, { LOGGED_USER } from "./User";
 import { TEMP_DATA } from "./Cart";
+import { Button } from "./../lib/exim-component";
 
 const ADDCART = styled.button`
-     background: white;
-    border: 1px solid;
-    /* font-size: 1rem; */
-    padding: 1rem;
-    width: 50%;
+  background: white;
+  border: 1px solid;
+  /* font-size: 1rem; */
+  padding: 1rem;
+  width: 50%;
 `;
 
 const ADD_TO_CART = gql`
@@ -37,16 +38,6 @@ const ADD_TO_TEMP_CART = gql`
     }
   }
 `;
-/**
- * e.preventDefault();
-    const res = await updateItemMutation({
-      variables: {
-        id: this.props.id,
-        ...this.state
-      }
-    });
-    console.log("Updated..!!!");
- */
 
 class AddCart extends React.Component {
   constructor(props) {
@@ -87,7 +78,7 @@ class AddCart extends React.Component {
     }
   }
   render() {
-    const id = this.props.id;
+    const { id, disabled } = this.props;
 
     return (
       <User>
@@ -102,9 +93,9 @@ class AddCart extends React.Component {
                 refetchQueries={[{ query: LOGGED_USER }]}
               >
                 {(addToCart, { loading }) => (
-                  <ADDCART disabled={loading} onClick={addToCart}>
-                    Add{loading && "ing"}To Cart
-                  </ADDCART>
+                  <Button disabled={loading || disabled} onClick={addToCart}>
+                    Add{loading && "ing"} To Cart
+                  </Button>
                 )}
               </Mutation>
             );
@@ -122,12 +113,12 @@ class AddCart extends React.Component {
                 ]}
               >
                 {(addToTempCart, { loading }) => (
-                  <ADDCART
-                    disabled={loading}
+                  <Button
+                    disabled={loading || disabled}
                     onClick={e => this.addToTempCart(e, addToTempCart)}
                   >
-                    Add{loading && "ing"}To Cart
-                  </ADDCART>
+                    Add{loading && "ing"} To Cart
+                  </Button>
                 )}
               </Mutation>
             );
@@ -137,16 +128,6 @@ class AddCart extends React.Component {
     );
   }
 }
-
-/**
- * refetchQueries={() => {
-      console.log("refetchQueries", product.id)
-        return {
-            query: GET_TODOS_BY_PRODUCT,
-            variables: { id: product.id }
-        };
-    }}
- */
 
 export default AddCart;
 export { ADD_TO_CART, ADDCART, ADD_TO_TEMP_CART };
