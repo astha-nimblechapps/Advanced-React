@@ -8,6 +8,7 @@ const Meta = () => (
         <link rel="shortcut icon" href="/static/favicon.png" />
         <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
         <link rel="stylesheet" type="text/css" href="/static/main.css"/>
+        {/* <link rel="stylesheet/scss" type="text/css" href="/static/nav.scss"/> */}
         <title>Sick Fits!</title>
     </Head>
 );

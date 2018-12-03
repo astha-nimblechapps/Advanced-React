@@ -49,3 +49,10 @@
 .divider {
   border-top: 1px solid #f0f2f4 !important;
 }
+
+.top-navbar{
+  justify-self: end !important;
+  @media (max-width: 1300px) {
+    justify-self: none;
+  }
+}

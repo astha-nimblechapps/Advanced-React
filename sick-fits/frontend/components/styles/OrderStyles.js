@@ -9,7 +9,7 @@ const OrderStyles = styled.div`
   border-top: 10px solid #393939;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-    }
+
   & > p {
     grid-template-columns: 0fr 0fr;
     margin: 0;
@@ -22,8 +22,8 @@ const OrderStyles = styled.div`
       }
     }
   }
-  .items{
-    margin:10px;
+  .items {
+    margin: 10px;
   }
   .item-details {
     float: left;
