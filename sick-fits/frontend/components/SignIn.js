@@ -5,7 +5,7 @@ import Form from "./styles/Form";
 import Error from "./ErrorMessage";
 import { LOGGED_USER } from "./User";
 import Link from "next/link";
-import { Label, Input, ButtonLink, Modal, Button } from '../lib/exim-component';
+import { Label, Input, ButtonLink, Modal, Button, Card } from '../lib/exim-component';
 
 const SIGNIN = gql`
   mutation SIGNIN($email: String!, $password: String!, $token: String!) {
@@ -43,7 +43,7 @@ class SignIn extends Component {
   render() {
     return (
 <div>
-      <Modal show={this.state.isVissible}>
+      <Modal className="modal-signin" show={this.state.isVissible} onHide={()=>this.setState({isVissible:false})} closeOnOutsideClick={() => this.setState({isVissible: false})}>
         <Modal.Body>
       
       <Mutation
@@ -57,7 +57,9 @@ class SignIn extends Component {
       >
         {(signin, { error, loading }) => {
           return (
+     
             <Form
+            style={{ borderWidth: 1, borderColor: '#393939', borderStyle: 'solid', boxShadow: 'none'}}
               method="post"
               onSubmit={async e => {
                 e.preventDefault();
@@ -93,6 +95,7 @@ class SignIn extends Component {
                 </ButtonLink>
                 <br />
                 <Button
+                  loader={loading}
                   disabled={loading}
                   type="submit"
                 >
@@ -100,6 +103,7 @@ class SignIn extends Component {
                 </Button>
               </fieldset>
             </Form>
+          
           );
         }}
       </Mutation>

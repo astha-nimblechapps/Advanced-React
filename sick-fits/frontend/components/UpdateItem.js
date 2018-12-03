@@ -7,7 +7,7 @@ import Form from "./styles/Form";
 import formatMoney from "../lib/formatMoney";
 import Error from "./ErrorMessage";
 import { from } from "zen-observable";
-import { Label, Input, Avatar, Button } from '../lib/exim-component';
+import { Label, Input, Avatar, Button, Card } from '../lib/exim-component';
 
 const SIGNLE_ITEM_QUERY = gql`
   query SIGNLE_ITEM_QUERY($id: ID!) {
@@ -75,6 +75,7 @@ class UpdateItem extends Component {
           return (
             <Mutation mutation={UPDATE_ITEMS}>
               {(updateItem, { loading, error }) => (
+                <Card>
                 <Form
                   data-test="form"
                   onSubmit={e => this.updateItem(e, updateItem)}
@@ -118,9 +119,10 @@ class UpdateItem extends Component {
                         onChange={this.handleChange}
                       />
                    
-                    <Button type="submit">Update</Button>
+                    <Button type="submit" loader={loading}>Update</Button>
                   </fieldset>
                 </Form>
+                </Card>
               )}
             </Mutation>
           );

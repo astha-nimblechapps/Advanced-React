@@ -3,10 +3,13 @@ import styled from "styled-components";
 const OrderStyles = styled.div`
   max-width: 1000px;
   margin: 0 auto;
-  border: 1px solid ${props => props.theme.offWhite};
+  border: 0px solid ${props => props.theme.offWhite};
   box-shadow: ${props => props.theme.bs};
   padding: 2rem;
   border-top: 10px solid #393939;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+    }
   & > p {
     grid-template-columns: 0fr 0fr;
     margin: 0;
@@ -18,6 +21,9 @@ const OrderStyles = styled.div`
         text-align: right;
       }
     }
+  }
+  .items{
+    margin:10px;
   }
   .item-details {
     float: left;

@@ -1,6 +1,7 @@
 import {Query} from 'react-apollo';
 import { LOGGED_USER } from './User';
 import SignIn from './SignIn';
+import { Typography } from '../lib/exim-component';
 
 const PleaseSignIn = (props) => (
     <Query query={LOGGED_USER}>
@@ -11,7 +12,7 @@ const PleaseSignIn = (props) => (
                 if(!data.me){
                     return(
                         <div>
-                            <p>Please SignIn To Continue </p>
+                            <Typography>Please SignIn To Continue </Typography>
                             <SignIn></SignIn>
                         </div>
                     )

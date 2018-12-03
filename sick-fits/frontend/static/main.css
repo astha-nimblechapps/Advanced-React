@@ -1,32 +1,51 @@
-.update-btn{
+.update-btn {
   background-color: #393939 !important;
-  color: #ffffff
+  color: #ffffff;
 }
 
-.per-tbl{
+.per-tbl {
   padding: 6px !important;
 }
 
-.edt-btn{
-  float: right; 
-  padding: 0; 
-  margin: 0;  
-  height: 31px !important;
+.edt-btn {
+  float: right;
+  padding: 3px !important;
+  margin: 0;
+  height: 35px !important;
 }
 
-.an{
+.an {
   color: #ffffff !important;
 }
 
-.edt-img{
+.edt-img {
   text-align: center;
 }
 
-.ls-order{
+.ls-order {
   list-style: none;
 }
 
-.p-right{
+.p-right {
   float: right !important;
   font-weight: 700;
+}
+
+.card-singup {
+  max-width: 600px;
+  margin: auto;
+}
+
+.modal-body {
+  padding: 20px 20px !important;
+}
+
+.brand-logo {
+  margin: auto !important;
+  width: 120px !important;
+  height: 20px !important;
+}
+
+.divider {
+  border-top: 1px solid #f0f2f4 !important;
 }

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Cart from './Cart';
 import Search from './Search'
+import { ButtonLink, Brand, Color } from '../lib/exim-component';
 
 const Logo = styled.div`
     font-size: 2.3rem;
@@ -45,14 +46,14 @@ const StyledHeader = styled.header`
 
 const Header = () =>(
     <StyledHeader>
+       
         <div className="bar ">
-            <Logo>
-                <Link href="/"> 
-                    <a>
-                        Demo
-                    </a> 
-                </Link>
-            </Logo>
+           
+            <Brand logo={true} style="dark" href="/"> Demo </Brand>
+                {/* <ButtonLink href="/">
+                   Demo
+                </ButtonLink> */}
+       
             <Nav/>
         </div>
         <div className="sub-bar">

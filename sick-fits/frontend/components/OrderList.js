@@ -7,24 +7,37 @@ import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 import formatMoney from "../lib/formatMoney";
 import OrderItemStyles from "./styles/OrderItemStyles";
-import { List, Label,Avatar, Typography, ButtonLink, Card } from "../lib/exim-component";
+import {
+  List,
+  Label,
+  Avatar,
+  Typography,
+  ButtonLink,
+  Card,
+  Icon,
+  Divider
+} from "../lib/exim-component";
 import Router from "next/router";
 
 const ORDER_LIST = gql`
   query ORDER_LIST {
     orders(orderBy: createdAt_DESC) {
       id
+      charge
       total
       createdAt
+      user {
+        id
+      }
       items {
         id
         title
         description
-        image
         price
+        image
         quantity
       }
-      user{
+      user {
         name
         id
         email
@@ -56,52 +69,96 @@ class OrderList extends React.Component {
             );
           return (
             <div>
-           
               <List className="ls-order">
-              <List.Item>
-                {orders.map(order => (
-                  <Card>
-                  <OrderItemStyles key={order.id}>
-                  
-                    <ButtonLink onClick={() => Router.push({ pathname: "/order", query: { id: order.id }})}>
-                     
-                    <div className="images">
-                          {order.items.map(item => (
-                            <Avatar
-                            key={item.id}
-                              src={item.image}/>
-                          ))}
-                        </div>
-                        <div className="order-meta">
-                       <div className="div-fir">
-                       <Typography useFor="plexMonoReg">
-                            <Label>{order.user.name}</Label>
-                        </Typography>
-                        <Typography className="p-right" useFor="plexMonoReg"><Label>{formatDistance(order.createdAt, new Date())}</Label></Typography>
-                       </div>
-                        <div className="div-sec">
-                        <Typography useFor="plexMonoReg">
-                            <Label>{order.items.reduce((a, b) => a + b.quantity, 0)}{" "}
-                            Items</Label>
-                          </Typography>
-                          <Typography  useFor="plexMonoReg"> <Label>{formatMoney(order.total)} </Label></Typography>
-                          <Typography useFor="plexMonoReg"><Label>{order.items.length} Items </Label></Typography>
-                        </div>
-                         
-                         
-                       
-                          
-                        </div>
-                       
-                      
-                    </ButtonLink>
-                   
-                  </OrderItemStyles>
-                  </Card>
-                ))}
-              </List.Item>
+                <List.Item>
+                  {orders.map(order => (
+                    <Card key={order.id}>
+                      <OrderItemStyles key={order.id}>
+                        <ButtonLink
+                          onClick={() =>
+                            Router.push({
+                              pathname: "/order",
+                              query: { id: order.id }
+                            })
+                          }
+                        >
+                          <div className="order-meta">
+                            <div className="div-fir">
+                              <Typography useFor="plexMonoReg">
+                                <Label> {order.user.name}</Label>
+                              </Typography>
+                              <Typography
+                                className="p-right"
+                                useFor="plexMonoReg"
+                              >
+                                <Label>
+                                  {formatDistance(order.createdAt, new Date())}
+                                </Label>
+                              </Typography>
+                            </div>
+                            <Divider />
+                            <div className="div-sec">
+                              <Typography useFor="plexMonoReg">
+                                <h6
+                                  style={{
+                                    marginLeft: "8px",
+                                    marginTop: "2px",
+                                    marginBottom: "0px",
+                                    fontSize: "13px"
+                                  }}
+                                >
+                                  Items
+                                </h6>
+                                <Label>
+                                  {order.items.reduce(
+                                    (a, b) => a + b.quantity,
+                                    0
+                                  )}{" "}
+                                  Items
+                                </Label>
+                              </Typography>
+
+                              <Typography useFor="plexMonoReg">
+                                {" "}
+                                <h6
+                                  style={{
+                                    marginLeft: "8px",
+                                    marginTop: "2px",
+                                    marginBottom: "0px",
+                                    fontSize: "13px"
+                                  }}
+                                >
+                                  Total Items
+                                </h6>
+                                <Label>{order.items.length} Items </Label>
+                              </Typography>
+                              <Typography useFor="plexMonoReg">
+                                <h6
+                                  style={{
+                                    marginLeft: "8px",
+                                    marginTop: "2px",
+                                    marginBottom: "0px",
+                                    fontSize: "13px"
+                                  }}
+                                >
+                                  Sub Total
+                                </h6>
+                                <Label> {formatMoney(order.total)}</Label>
+                              </Typography>
+                            </div>
+                          </div>
+
+                          <div className="images">
+                            {order.items.map(item => (
+                              <Avatar key={item.id} src={item.image} />
+                            ))}
+                          </div>
+                        </ButtonLink>
+                      </OrderItemStyles>
+                    </Card>
+                  ))}
+                </List.Item>
               </List>
-             
             </div>
           );
         }}

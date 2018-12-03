@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import TableStyle from './styles/Table';
 import SickButton from './styles/SickButton';
 import PropTypes from 'prop-types';
-import { Button, CheckBox, Table } from '../lib/exim-component';
+import { Button, CheckBox, Table, Label,Icon } from '../lib/exim-component';
 
 const possiblePermissions = [
   'ADMIN',
@@ -105,6 +105,7 @@ class UserPermissions extends React.Component {
               <td>{user.email}</td>
               {possiblePermissions.map(permission => (
                 <td key={permission}>
+          
                   <label htmlFor={`${user.id}-permission-${permission}`}>
                   <CheckBox
                   name={permission}
@@ -121,7 +122,7 @@ class UserPermissions extends React.Component {
               ))}
               <td>
                 <Button disabled={loading} onClick={updatePermissions} size="medium" className="update-btn">
-                Updat{loading ? 'ing' : 'e'}
+                <Icon for={"upload"} />Updat{loading ? 'ing' : 'e'}
                 </Button>
                 {/* <SickButton type="button" disabled={loading} onClick={updatePermissions}>
                  

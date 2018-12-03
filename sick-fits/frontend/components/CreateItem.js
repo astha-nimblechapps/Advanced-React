@@ -5,7 +5,7 @@ import Router from 'next/router';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
-import { Label, Input, Avatar, Button } from '../lib/exim-component';
+import { Label, Input, Avatar, Button, Card } from '../lib/exim-component';
 
 const ADD_ITEMS = gql`
   mutation ADD_ITEMS(
@@ -63,6 +63,7 @@ class CreateItem extends Component {
     return (
       <Mutation mutation={ADD_ITEMS} variables={this.state}>
         {(createItem, { loading, error }) => (
+          <Card>
           <Form
             data-test="form"
             onSubmit={async e => {
@@ -154,9 +155,10 @@ class CreateItem extends Component {
                   onChange={this.handleChange}
                 />
            
-              <Button type="submit">Submit</Button>
+              <Button type="submit" loader={loading}>Submit</Button>
             </fieldset>
           </Form>
+          </Card>
         )}
       </Mutation>
     );

@@ -5,7 +5,7 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import PropTypes from 'prop-types';
 import { LOGGED_USER } from './User';
-import { Label, Input, ButtonLink, Button } from '../lib/exim-component';
+import { Label, Input, ButtonLink, Button, Card } from '../lib/exim-component';
 
 const RESET_PASSWORD = gql`
   mutation RESET_PASSWORD($resetToken: String!,$password: String!, $confirmPassword: String!) {
@@ -44,6 +44,7 @@ class ResetPassword extends Component {
                     (resetPassword,{error,loading,called}) => {
 
                     return(
+                        <Card>
             <Form method='post' onSubmit={
                 async (e) => {
                     e.preventDefault();
@@ -77,10 +78,11 @@ class ResetPassword extends Component {
                         />
                     
 
-                    <Button type="submit">Reset</Button>
+                    <Button type="submit" loader={loading}>Reset</Button>
 
                 </fieldset>
             </Form>
+            </Card>
                     )
             }
         }

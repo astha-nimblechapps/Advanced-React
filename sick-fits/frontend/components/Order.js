@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import formatMoney from "../lib/formatMoney";
 import Error from "./ErrorMessage";
 import OrderStyles from "./styles/OrderStyles";
-import { Label, Typography, Avatar, Button } from '../lib/exim-component';
+import { Label, Typography, Avatar, Button, Card, Divider } from '../lib/exim-component';
 
 const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
@@ -43,6 +43,7 @@ class Order extends React.Component {
           if (loading) return <p>Loading...</p>;
           const order = data.order;
           return (
+            <Card>
             <OrderStyles>
               <Head>
                 <title>Sick Fits - Order {order.id}</title>
@@ -51,6 +52,7 @@ class Order extends React.Component {
                 <Label>Order ID:</Label>
                 <Label>{this.props.id}</Label>
               </Typography>
+            
               <Typography useFor="subtitle">
                 <Label>Charge:</Label>
                 <Label>{order.charge}</Label>
@@ -82,6 +84,7 @@ class Order extends React.Component {
                 ))}
               </div>
             </OrderStyles>
+            </Card>
           );
         }}
       </Query>

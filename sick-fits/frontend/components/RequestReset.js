@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-import { Label, Input, ButtonLink, Button } from '../lib/exim-component';
+import { Label, Input, ButtonLink, Button, Card } from '../lib/exim-component';
 
 const RESET_REQUEST = gql`
   mutation RESET_REQUEST($email: String!) {
@@ -24,6 +24,7 @@ class RequestReset extends Component {
     return (
       <Mutation mutation={RESET_REQUEST} variables={this.state}>
         {(reset, { error, loading, called }) => (
+          <Card>
           <Form
             method="post"
             data-test="form"
@@ -48,9 +49,10 @@ class RequestReset extends Component {
                 />
              
 
-              <Button type="submit">Request Reset</Button>
+              <Button type="submit" loader={loading}>Request Reset</Button>
             </fieldset>
           </Form>
+          </Card>
         )}
       </Mutation>
     );
