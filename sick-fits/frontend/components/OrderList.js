@@ -26,9 +26,6 @@ const ORDER_LIST = gql`
       charge
       total
       createdAt
-      user {
-        id
-      }
       items {
         id
         title
