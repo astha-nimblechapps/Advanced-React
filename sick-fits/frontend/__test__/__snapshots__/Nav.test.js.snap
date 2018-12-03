@@ -218,77 +218,10 @@ Array [
         }
         variables={
           Object {
-            "token": "",
+            "token": "61.21832903116769",
           }
         }
-      >
-        <button>
-          Cart
-          <CartCount
-            count={0}
-          >
-            <CartCount__AnimatedStyles>
-              <span
-                className="CartCount__AnimatedStyles-xxvp4g-1 oQydm"
-              >
-                <TransitionGroup
-                  childFactory={[Function]}
-                  component="div"
-                >
-                  <div>
-                    <CSSTransition
-                      className="count"
-                      classNames="count"
-                      in={true}
-                      key=".$0"
-                      onExited={[Function]}
-                      timeout={
-                        Object {
-                          "enter": 400,
-                          "exit": 400,
-                        }
-                      }
-                      unmountOnExit={true}
-                    >
-                      <Transition
-                        appear={false}
-                        className="count"
-                        enter={true}
-                        exit={true}
-                        in={true}
-                        mountOnEnter={false}
-                        onEnter={[Function]}
-                        onEntered={[Function]}
-                        onEntering={[Function]}
-                        onExit={[Function]}
-                        onExited={[Function]}
-                        onExiting={[Function]}
-                        timeout={
-                          Object {
-                            "enter": 400,
-                            "exit": 400,
-                          }
-                        }
-                        unmountOnExit={true}
-                      >
-                        <CartCount__Dot
-                          className="count"
-                        >
-                          <div
-                            className="count CartCount__Dot-xxvp4g-0 iAflQU"
-                          >
-                            0
-                          </div>
-                        </CartCount__Dot>
-                      </Transition>
-                    </CSSTransition>
-                  </div>
-                </TransitionGroup>
-              </span>
-            </CartCount__AnimatedStyles>
-          </CartCount>
-        </button>
-      </Query>
+      />
     </ul>
   </NavStyles>,
   <ul
@@ -504,77 +437,10 @@ Array [
       }
       variables={
         Object {
-          "token": "",
+          "token": "61.21832903116769",
         }
       }
-    >
-      <button>
-        Cart
-        <CartCount
-          count={0}
-        >
-          <CartCount__AnimatedStyles>
-            <span
-              className="CartCount__AnimatedStyles-xxvp4g-1 oQydm"
-            >
-              <TransitionGroup
-                childFactory={[Function]}
-                component="div"
-              >
-                <div>
-                  <CSSTransition
-                    className="count"
-                    classNames="count"
-                    in={true}
-                    key=".$0"
-                    onExited={[Function]}
-                    timeout={
-                      Object {
-                        "enter": 400,
-                        "exit": 400,
-                      }
-                    }
-                    unmountOnExit={true}
-                  >
-                    <Transition
-                      appear={false}
-                      className="count"
-                      enter={true}
-                      exit={true}
-                      in={true}
-                      mountOnEnter={false}
-                      onEnter={[Function]}
-                      onEntered={[Function]}
-                      onEntering={[Function]}
-                      onExit={[Function]}
-                      onExited={[Function]}
-                      onExiting={[Function]}
-                      timeout={
-                        Object {
-                          "enter": 400,
-                          "exit": 400,
-                        }
-                      }
-                      unmountOnExit={true}
-                    >
-                      <CartCount__Dot
-                        className="count"
-                      >
-                        <div
-                          className="count CartCount__Dot-xxvp4g-0 iAflQU"
-                        >
-                          0
-                        </div>
-                      </CartCount__Dot>
-                    </Transition>
-                  </CSSTransition>
-                </div>
-              </TransitionGroup>
-            </span>
-          </CartCount__AnimatedStyles>
-        </CartCount>
-      </button>
-    </Query>
+    />
   </ul>,
 ]
 `;

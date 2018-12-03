@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const PaginationStyles = styled.div`
+  line-height: 1rem;
   text-align: center;
   display: inline-grid;
   grid-template-columns: repeat(4, auto);
@@ -12,13 +13,15 @@ const PaginationStyles = styled.div`
   border-radius: 10px;
   & > * {
     margin: 0;
-    padding: 15px 30px;
+    padding: 10px 30px;
     border-right: 1px solid ${props => props.theme.lightgrey};
     &:last-child {
       border-right: 0;
     }
+    display: inline-flex;
+    align-items: center;
   }
-  a[aria-disabled='true'] {
+  a[aria-disabled="true"] {
     color: grey;
     pointer-events: none;
   }

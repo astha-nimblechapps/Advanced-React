@@ -4,6 +4,7 @@ import { LOGGED_USER } from "./User";
 import { TEMP_DATA } from "./Cart";
 import React, { Component } from "react";
 import Router from "next/router";
+import { ButtonLink } from "./../lib/exim-component";
 
 const SIGNOUT = gql`
   mutation SIGNOUT {
@@ -47,7 +48,9 @@ class SignOut extends Component {
         ]}
       >
         {(signout, { error, loading }) => (
-          <button onClick={e => this.signOut(e, signout)}>Sign Out</button>
+          <ButtonLink onClick={e => this.signOut(e, signout)}>
+            Sign Out
+          </ButtonLink>
         )}
       </Mutation>
     );

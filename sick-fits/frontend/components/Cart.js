@@ -11,7 +11,8 @@ import CartItem from "./CartItem";
 import calcTotalPrice from "../lib/calcTotalPrice";
 import formatMoney from "../lib/formatMoney";
 import Payment from "./Payment";
-import Router from 'next/router';
+import Router from "next/router";
+import { List, Typography, Button } from "./../lib/exim-component";
 
 const LOCAL_STATE = gql`
   query {
@@ -43,37 +44,35 @@ const TEMP_DATA = gql`
   }
 `;
 
-
-
 class Cart extends React.Component {
-  
-  
   constructor(props) {
     super(props);
     this.state = {
       tokenId: ""
-    }
+    };
   }
-
 
   componentDidMount() {
-    if(localStorage.getItem("randomId")){
+    if (localStorage.getItem("randomId")) {
       this.setState({
         tokenId: localStorage.getItem("randomId").toString()
-      })
+      });
     }
-    // this.setState({
-    //   randomUser: localStorage.getItem("randomId")
-    // });
   }
 
-  goToLogin = async(toogleCart) =>{
+  goToLogin = async toogleCart => {
     await toogleCart();
     Router.push({
-      pathname:'/signin'
-    })
-  }
-  
+      pathname: "/signin"
+    });
+  };
+
+  getCartItems = items => {
+    return items.map(cartItem => (
+      <CartItem key={cartItem.id} cartItem={cartItem} />
+    ));
+  };
+
   render() {
     const Composed = adopt({
       user: ({ render }) => <User>{render}</User>,
@@ -81,51 +80,55 @@ class Cart extends React.Component {
         <Mutation mutation={TOOGLE_CART}>{render}</Mutation>
       ),
       localState: ({ render }) => <Query query={LOCAL_STATE}>{render}</Query>,
-      tempCart: ({ render }) => <Query query={TEMP_DATA} variables={{ token : this.state.tokenId}}>{render}</Query>
+      tempCart: ({ render }) => (
+        <Query query={TEMP_DATA} variables={{ token: this.state.tokenId }}>
+          {render}
+        </Query>
+      )
     });
     return (
       <Composed>
         {({ user, toogleCart, localState, tempCart }) => {
           const me = user.data.me;
           const cart = tempCart.data.tempCartItem;
-         // console.log(cart)
-          if (!me){ 
-            if(!cart) return <p> No item</p>
-            return ( 
-            <CartStyles open={localState.data.cartOpen}>
-            <header>
-              <CloseButton onClick={toogleCart} title="close">
-                &times;
-              </CloseButton>
-              <Supreme>Cart</Supreme>
-              <p>
-                You have {cart.length} item
-                {cart.length === 1 ? "" : "s"} in your cart
-              </p>
-            </header>
-            <ul>
-              {cart.map(cartItem => (
-              //  console.log(cartItem)
-                <CartItem key={cartItem.id} cartItem={cartItem} />
-              ))}
-            </ul>
-            <footer>
-              <p>{formatMoney(calcTotalPrice(cart))}</p>
-           
-              {
-                cart.length ? <Payment cart={cart}>
-                <SickButton onClick={() => this.goToLogin(toogleCart)}>Checkout</SickButton>
-              </Payment> : null
-              }
-              {/* {cart.length && (
-                <Payment>
-                  <SickButton>Checkout</SickButton>
-                </Payment>
-              )} */}
-            </footer>
-            </CartStyles>
-          )
-        }
+          if (!me) {
+            if (!cart) return <p> No item</p>;
+            return (
+              <CartStyles open={localState.data.cartOpen}>
+                <header>
+                  <CloseButton onClick={toogleCart} title="close">
+                    &times;
+                  </CloseButton>
+                  <Supreme>Cart</Supreme>
+                </header>
+                <List items={this.getCartItems(cart)}>
+                  <List.Section>
+                    {cart.length ? (
+                      <Typography useFor="subtitle">
+                        {" "}
+                        You have {cart.length} item
+                        {cart.length === 1 ? "" : "s"} in your cart
+                      </Typography>
+                    ) : (
+                      <Typography useFor="subtitle">
+                        No items in cart!!
+                      </Typography>
+                    )}
+                  </List.Section>
+                </List>
+                <footer>
+                  <p>{formatMoney(calcTotalPrice(cart))}</p>
+                  {cart.length ? (
+                    <Payment cart={cart}>
+                      <Button onClick={() => this.goToLogin(toogleCart)}>
+                        Checkout
+                      </Button>
+                    </Payment>
+                  ) : null}
+                </footer>
+              </CartStyles>
+            );
+          }
           return (
             <CartStyles open={localState.data.cartOpen}>
               <header>
@@ -133,21 +136,27 @@ class Cart extends React.Component {
                   &times;
                 </CloseButton>
                 <Supreme>Cart</Supreme>
-                <p>
-                  You have {me.cart.length} item
-                  {me.cart.length === 1 ? "" : "s"} in your cart
-                </p>
               </header>
-              <ul>
-                {me.cart.map(cartItem => (
-                  <CartItem key={cartItem.id} cartItem={cartItem} />
-                ))}
-              </ul>
+              <List items={this.getCartItems(me.cart)}>
+                <List.Section>
+                  {me.cart.length ? (
+                    <Typography useFor="subtitle">
+                      {" "}
+                      You have {me.cart.length} item
+                      {me.cart.length === 1 ? "" : "s"} in your cart
+                    </Typography>
+                  ) : (
+                    <Typography useFor="subtitle">
+                      No items in cart!!
+                    </Typography>
+                  )}
+                </List.Section>
+              </List>
               <footer>
                 <p>{formatMoney(calcTotalPrice(me.cart))}</p>
                 {me.cart.length && (
                   <Payment>
-                    <SickButton>Checkout</SickButton>
+                    <Button>Checkout</Button>
                   </Payment>
                 )}
               </footer>
