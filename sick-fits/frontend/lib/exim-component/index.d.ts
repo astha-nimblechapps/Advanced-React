@@ -11,7 +11,7 @@ export { Color } from "./components/Color/Color";
 export { Divider } from "./components/Divider/Divider";
 export { Dropdown } from "./components/Dropdown/Dropdown";
 export { Icon } from "./components/Icon/Icon";
-export { Input } from "./components/Input/Input";
+export { Input, InputGroup, InputGroupAddon, InputGroupButton } from "./components/Input/Input";
 export { Label } from "./components/Label/Label";
 export { List } from "./components/List/List";
 export { Modal } from "./components/Modal/Modal";
