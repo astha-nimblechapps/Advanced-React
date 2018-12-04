@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
-import Error from './ErrorMessage';
+import Error, {ErrorStyles} from './ErrorMessage';
 import { Label, Input, Avatar, Button, Card } from '../lib/exim-component';
 
 const ADD_ITEMS = gql`
@@ -34,6 +34,7 @@ class CreateItem extends Component {
     image: '',
     largeImage: '',
     price: 0,
+    errorMessage:'',
    
   };
   handleChange = e => {
@@ -59,6 +60,22 @@ class CreateItem extends Component {
       largeImage: file.eager[0].secure_url,
     });
   };
+
+  renderStatus = async (e, createItem) => {
+    e.preventDefault();
+    if (!this.state.title || !this.state.price || !this.state.description || !this.state.image || !this.state.largeImage) {
+      this.setState({ errorMessage: "All Fields are required.!!" });
+    } else {
+      const res = await createItem();              
+             // console.log(res);
+              Router.push({
+                pathname: '/item',
+                query: { id: res.data.createItem.id },
+              });
+      this.setState({ errorMessage:''});
+    }
+  };
+
   render() {
     return (
       <Mutation mutation={ADD_ITEMS} variables={this.state}>
@@ -67,16 +84,20 @@ class CreateItem extends Component {
           <Form
             data-test="form"
             onSubmit={async e => {
-              e.preventDefault();              
-              const res = await createItem();              
-             // console.log(res);
-              Router.push({
-                pathname: '/item',
-                query: { id: res.data.createItem.id },
-              });
+             this.renderStatus(e,createItem)
             }}
           >
-            <Error error={error} />
+            {this.state.errorMessage ? (
+                      <ErrorStyles>
+                        <p data-test="graphql-error">
+                          <strong>Shoot!</strong>
+                          {this.state.errorMessage}
+                        </p>
+                      </ErrorStyles>
+                    ) : (
+                      <Error error={error} />
+                    )}
+               
             <fieldset disabled={loading} aria-busy={loading}>
             <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Add Item</h6>
             <Label size="small">Image:</Label>

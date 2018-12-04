@@ -49,3 +49,4 @@ DisplayError.propTypes = {
 };
 
 export default DisplayError;
+export {ErrorStyles}

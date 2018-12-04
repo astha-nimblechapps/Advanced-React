@@ -24,7 +24,7 @@ const Query = {
   },
   async tempCartItem(parent, args, ctxt, info) {
   //  console.log("Astha",args.token)
-    if(!args.token) throw new Error("Token not found")
+    if(!args.token) return []
     return await ctxt.db.query.tempCartItems(
       {
         where: { token: args.token }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
-import Error from './ErrorMessage';
+import Error, {ErrorStyles} from './ErrorMessage';
 import PropTypes from 'prop-types';
 import { LOGGED_USER } from './User';
 import { Label, Input, ButtonLink, Button, Card } from '../lib/exim-component';
@@ -26,11 +26,26 @@ class ResetPassword extends Component {
     state = {
         password: '',
         confirmPassword: '',
+        errorMessage:'',
       };
       saveToState = e => {
         this.setState({ [e.target.name]: e.target.value });
       };
       
+      renderStatus = async (e, resetPassword) => {
+        e.preventDefault();
+        if (!this.state.password || !this.state.confirmPassword) {
+          this.setState({ errorMessage: "All Fields are required.!!" });
+        } else if (this.state.confirmPassword !== this.state.password) {
+          console.log("True")
+          this.setState({ errorMessage: "Password Does not match" });
+        } else {
+          await resetPassword();
+          this.setState({ password: '', confirmPassword: '', errorMessage:''});
+        }
+      };
+    
+    
     render() {
         return (
             <Mutation mutation={RESET_PASSWORD} variables={{ 
@@ -47,12 +62,19 @@ class ResetPassword extends Component {
                         <Card>
             <Form method='post' onSubmit={
                 async (e) => {
-                    e.preventDefault();
-                    await resetPassword();
-                    this.setState({ password: '', confirmPassword: ''});
+                    this.renderStatus(e, resetPassword);
                 }
             }>
-                <Error error={error} />
+                {this.state.errorMessage ? (
+                      <ErrorStyles>
+                        <p data-test="graphql-error">
+                          <strong>Shoot!</strong>
+                          {this.state.errorMessage}
+                        </p>
+                      </ErrorStyles>
+                    ) : (
+                      <Error error={error} />
+                    )}
                 
                 <fieldset disabled={loading} aria-busy={loading}>
                 <h6 style={{marginTop: '8px', marginBottom: '8px'}}>Change Password</h6>
