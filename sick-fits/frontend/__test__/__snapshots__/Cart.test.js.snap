@@ -18,13 +18,13 @@ exports[`<Cart/> renders and matches 1`] = `
     <h3
       className="Supreme-xv30qb-0 hpaXsq"
     >
-      Your Cart
+      Cart
     </h3>
   </Supreme>
   <p>
     You have 
     1
-     itme
+     item
      in your cart
   </p>
 </header>
