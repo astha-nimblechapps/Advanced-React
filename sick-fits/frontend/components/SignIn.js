@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Form from "./styles/Form";
-
 import Error, { ErrorStyles } from "./ErrorMessage";
 import { LOGGED_USER } from "./User";
 import Link from "next/link";
@@ -12,7 +11,7 @@ import {
   ButtonLink,
   Modal,
   Button,
-  Card
+  Card,
 } from "../lib/exim-component";
 
 const SIGNIN = gql`
